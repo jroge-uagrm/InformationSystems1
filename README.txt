@@ -7,8 +7,3 @@ git add -A                -Para añadir archivos y luego subirlos
 git commit -m MENSAJE     -Para confirmar archivos añadidos
 git push origin master    -Para subir archivos confirmados
 git pull		  -Para descargar cambios
-<<<<<<< HEAD
-AAAAA
-=======
-BBBBB
->>>>>>> c878f0132e960cf42e1ce17cd0154b0a1681fe6b
