@@ -78,7 +78,7 @@ create table cuota(
 	nro int,
 	monto float not null,
 	estado varchar(40) not null,
-	primary key(idMetodoDePago, nro),
+	primary key(idMetodoDePago,nro),
 	foreign key(idMetodoDePago) references metodoDePago(id)
 );
 

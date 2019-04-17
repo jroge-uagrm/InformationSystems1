@@ -1,5 +1,5 @@
 ﻿/*1	Validar que la persona que realiza 
-	la venta pertenece al departamento de ventas*/
+	la venta pertenece al departamento de ventas*
 create trigger validarTrabajadorEnVenta
 on notaDeVenta 
 for insert
@@ -13,13 +13,14 @@ if ((
 begin
 	print 'El trabajador no pertenece al depto. de ventas.'
 	ROLLBACK TRANSACTION
-end
+end*/
 
 /*1	Aumentar la cantidad de cargos en un departamento
 	al ingresar un nuevo cargo*/
 create trigger aumentarCantidadEnDepartamento
 on cargo for insert as
-if()
+	update departamento set cant
 begin
 end;
+/*disminuir el monto en cuotas*/
 
