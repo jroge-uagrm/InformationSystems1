@@ -72,23 +72,43 @@ create table metodoPago(
 	id int primary key,
 	nombre varchar(40) not null,
 	monto float not null,
-	plazo int not null
+	plazo int not null,
+	idIntervaloDePago int not null,
+	foreign key(idIntervaloDePago) references intervaloDePago(id)
+);
+
+create table intervaloDePago(
+	id int primary key,
+	nombre varchar(40) not null
 );
 
 create table cuota(
 	idMetodoDePago int,
 	id int,
 	monto float not null,
+	idIntervaloDePago int not null,
 	primary key(idMetodoDePago, id),
-	foreign key(idMetodoDePago) references metodoDePago(id)
+	foreign key(idMetodoDePago) references metodoDePago(id),
+	foreign key(idIntervaloDePago) references intervaloDePago(id)
 );
 
+create table docente(
+	codigoPersona int primary key,
+	profesion varchar(40) not null,
+	foreign key(codigoPersona)references persona(codigo)
+);
 
+create table tipo(
+	id int primary key,
+	nombre varchar(30) not null
+);
 
-create table aula(
-	nro int primary key,
-	ubicacion varchar(30)not null,
-	capacidad int not null
+create table docente_tipo(
+	codigoDocente int,
+	idTipo int,
+	primary key (codigoDocente, idTipo), 
+	foreign key (codigoDocente) references docente(codigo),
+	foreign key (idTipo) references tipo (id)
 );
 
 create table curso(
@@ -99,10 +119,21 @@ create table curso(
 	capacidad int not null
 );
 
+create table aula(
+	nro int primary key,
+	ubicacion varchar(30)not null,
+	capacidad int not null
+);
+
 create table horario(
 	id int primary key,
 	horaInicio int not null,
 	horaFin int not null
+);
+
+create table gestion(
+	nro int primary key,
+	nombre varchar(30) not null
 );
 
 create table grupo(
@@ -116,11 +147,6 @@ create table grupo(
 	foreign key(idHorario)references horario(id)
 );
 
-create table gestion(
-	nro int primary key,
-	nombre varchar(30) not null
-);
-
 create table grupo_gestion(
 	idGrupo int,
 	nroGestion int,
@@ -129,46 +155,4 @@ create table grupo_gestion(
 	foreign key (nroGestion) references gestion (nro)
 );
 
-create table tipo(
-	id int primary key,
-	nombre varchar(30) not null
-);
-
-create table curso_tipo(
-	codigoCurso int,
-	idTipo int,
-	primary key (codigoCurso, idTipo),
-	foreign key (codigoCurso) references curso (codigo),
-	foreign key (idTipo) references tipo (id)
-);
-
-create table docente(
-	codigoPersona int primary key,
-	profesion varchar(40) not null,
-	foreign key(codigoPersona)references persona(codigo)
-);
-
-create table docente_tipo(
-	codigoDocente int,
-	idTipo int,
-	primary key (codigoDocente, idTipo), 
-	foreign key (codigoDocente) references docente(codigo),
-	foreign key (idTipo) references tipo (id)
-);
-
-create table Pago_Docente(
-	idMetodoPago int,
-	codigoDocente int,
-	primary key (idMetodoPago, codigoDocente),
-	foreign key (idMetodoPago) references metodoPago (id),
-	foreign key (codigoDocente) references docente (codigo)
-);
-
-create table notaVenta_curso(
-	nroVenta int,
-	codigoCurso int,
-	primary key (nroVenta, codigoCurso),
-	foreign key (nroVenta) references notaVenta (nro),
-	foreign key (codigoCurso) references curso (codigo)
-);
 
