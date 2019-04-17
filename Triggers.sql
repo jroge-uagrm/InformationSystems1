@@ -72,29 +72,105 @@ begin
 	rollback tran
 end
 
+/*7	Verificar que al crear un cargo
+	este cargo inicia con estado inactivo (0)*/
+create trigger estadoInicialCargo
+on cargo for insert as
+if((select estado
+	from inserted)!=0)
+begin
+	print 'El estado del cargo debe iniciar como inactivo'
+	rollback tran
+end
+
+/*8	Actualizar un cargo a estado activo cuando
+	se inserta a una persona en ese cargo*/
+create trigger actualizarCargo
+on personalAdministrativo for insert as
+declare @idCarg int
+set @idCarg=(select idCargo from inserted)
+update cargo set estado=1 where id=@idCarg
+
+/*8	Actualizar un cargo a estado inactivo cuando
+	no existan personas en ese cargo*/
+create trigger actualizarCargoB
+on personalAdministrativo for delete as
+declare @idCarg int
+declare cursorCargos cursor for(select idCargo from deleted)
+open cursorCargos
+fetch from cursorCargos into @idCarg
+while(@@FETCH_STATUS=0)
+begin
+	if((select count(*) 
+		from personalAdministrativo 
+		where idCargo=@idCarg)=0)
+	begin
+		update cargo set estado=0 where id=@idCarg
+	end
+	fetch from cursorCargos into @idCarg
+end
+close cursorCargos
+deallocate cursorCargos
 
 
 
 
-
-
-
-
-
-/*n	Validar que la persona que realiza 
-	la venta pertenece al departamento de ventas*
+/*9	Validar que la persona que realiza 
+	la venta pertenece al departamento de ventas*/
 create trigger validarTrabajadorEnVenta
-on notaDeVenta 
-for insert
-as
-if ((
-	select departamento.nombre
-	from personalAdministrativo,cargo,departamento
+on notaVenta for insert as
+if((select departamento.nombre
+	from personalAdministrativo,cargo,departamento,inserted
 	where inserted.codigoPersonalAdministrativo=personalAdministrativo.codigo and
 			personalAdministrativo.idCargo=cargo.id and
 			cargo.idDepartamento=departamento.id)!='Departamento de ventas')
 begin
 	print 'El trabajador no pertenece al depto. de ventas.'
 	rollback tran
-end*/
+end
+
+/*10Reducir el monto de un metodo de pago cuando se 
+	inserta un pago de una cuota de dicho metodo de pago
+	y la cuota se actualiza a pagada*/
+create trigger reducirMonto
+on pagoDeCuota for insert as
+declare @monto float
+declare @idMetodoPago float
+declare @nroCuota int
+set @nroCuota=(select nroCuota from inserted)
+set @monto=(select monto 
+			from inserted,cuota 
+			where inserted.nroCuota=cuota.nro)
+set @idMetodoPago=(select idMetodoDePago
+					from inserted)
+update metodoDePago set monto=monto-@monto where id=@idMetodoPago
+update cuota set estado=1 where nro=@nroCuota
+
+/*11Crear N cuotas en funcion a su plazo 
+	y a su intervalo de pago*/
+create trigger crearCuotas
+on metodoDePago for insert as
+declare @idMetodo int
+declare @cantidadDeCuotas int
+declare @plazoACumplir int
+declare @intervalo int
+declare @montoPorCuota float
+set @idMetodo=(select id from inserted)
+set @plazoACumplir=(select plazo from inserted)
+set @intervalo=(select idIntervaloDePago from inserted)
+set @cantidadDeCuotas=( 12 * @plazoACumplir ) / @intervalo
+set @montoPorCuota=(select monto from inserted)/@cantidadDeCuotas
+declare @contador int
+declare @cuotasExistentes int
+set @cuotasExistentes=(select count(*)from cuota)
+set @contador=1
+while(@contador<=@cantidadDeCuotas)
+begin
+	insert into cuota values(@idMetodo,@contador+@cuotasExistentes,@montoPorCuota,0)
+	set @contador=@contador+1
+end
+
+
+
+
 
