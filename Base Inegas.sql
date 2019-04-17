@@ -45,7 +45,7 @@ create table departamento(
 create table cargo(
 	id int primary key,
 	nombre varchar(30) not null,
-	estado varchar(30) not null
+	estado varchar(30) not null,
 	idDepartamento int not null,
 	foreign key (idDepartamento) references departamento (id)
 );
@@ -156,4 +156,10 @@ create table grupo_gestion(
 	foreign key (nroGestion) references gestion (nro)
 );
 
-insert into persona values ();
+insert into persona values (1,111,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1995-02-12');
+insert into persona values (2,222,'Sebastian','Alvarez','Roca',72520129,'sebasalvarez@gmail.com','1985-08-26');
+insert into persona values (3,333,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1988-10-12');
+insert into persona values (4,444,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1992-04-12');
+insert into persona values (5,555,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1996-07-12');
+
+insert into alumno values 
