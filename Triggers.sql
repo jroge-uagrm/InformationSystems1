@@ -1,6 +1,6 @@
 ﻿/*1	Validar que la persona que realiza 
 	la venta pertenece al departamento de ventas*/
-create trigger validacionVenta
+create trigger validarTrabajadorEnVenta
 on notaDeVenta 
 for insert
 as
@@ -17,4 +17,9 @@ end
 
 /*1	Aumentar la cantidad de cargos en un departamento
 	al ingresar un nuevo cargo*/
+create trigger aumentarCantidadEnDepartamento
+on cargo for insert as
+if()
+begin
+end;
 
