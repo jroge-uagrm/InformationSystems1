@@ -45,7 +45,7 @@ create table departamento(
 create table cargo(
 	id int primary key,
 	nombre varchar(30) not null,
-	estado varchar(30) not null
+	estado varchar(30) not null,
 	idDepartamento int not null,
 	foreign key (idDepartamento) references departamento (id)
 );
