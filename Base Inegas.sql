@@ -59,13 +59,9 @@ create table personalAdministrativo(
 	foreign key (idCargo) references cargo (id)
 );
 
-create table notaVenta(
-	nro int primary key,
-	fecha date not null,
-	codigoAdministrativo int not null,
-	codigoAlumno int not null,
-	foreign key (codigoAdministrativo) references personalAdministrativo (codigoPersona),
-	foreign key (codigoAlumno) references alumno (codigoPersona)
+create table intervaloDePago(
+	id int primary key,
+	nombre varchar(40) not null
 );
 
 create table metodoPago(
@@ -77,9 +73,15 @@ create table metodoPago(
 	foreign key(idIntervaloDePago) references intervaloDePago(id)
 );
 
-create table intervaloDePago(
-	id int primary key,
-	nombre varchar(40) not null
+create table notaVenta(
+	nro int primary key,
+	fecha date not null,
+	codigoAdministrativo int not null,
+	codigoAlumno int not null,
+	idMetodoPago int not null,
+	foreign key (codigoAdministrativo) references personalAdministrativo (codigoPersona),
+	foreign key (codigoAlumno) references alumno (codigoPersona),
+	foreign key (idMetodoPago) references metodoPago (id)
 );
 
 create table cuota(
@@ -165,4 +167,4 @@ insert into persona values (6,666,'Juan','Zegarra','Lopez',72520129,'juanzegarra
 insert into persona values (7,777,'Norma','Soliz','Lujan',72520129,'normasoliz@gmail.com','1987-12-22');
 insert into persona values (8,888,'Karen','Perez','Herrera',76385791,'karenperez@gmail.com','1995-02-18');
 
-insert into alumno values ();
+insert into alumno values (11,1,);
