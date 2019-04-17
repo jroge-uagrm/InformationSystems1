@@ -152,18 +152,13 @@ create table grupo(
 	nroAula int not null,
 	codigoCurso int not null,
 	idHorario int not null,
+	nroGestion int not null,
 	foreign key(nroAula)references aula(nro),
 	foreign key(codigoCurso)references curso(codigo),
-	foreign key(idHorario)references horario(id)
+	foreign key(idHorario)references horario(id),
+	foreign key(nroGestion)references gestion(nro)
 );
 
-create table grupo_gestion(
-	idGrupo int,
-	nroGestion int,
-	primary key (idGrupo, nroGestion),
-	foreign key (idGrupo) references grupo (id),
-	foreign key (nroGestion) references gestion (nro)
-);
 
 insert into persona values (1,111,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1995-02-12');
 insert into persona values (2,222,'Sebastian','Alvarez','Roca',72520129,'sebasalvarez@gmail.com','1985-08-26');
