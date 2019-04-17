@@ -115,7 +115,7 @@ create table docente_tipo(
 create table curso(
 	codigo int primary key,
 	nombre varchar(30) not null,
-	duracion int not,
+	duracion int not null,
 	monto float not null,
 	capacidad int not null
 );
@@ -158,7 +158,7 @@ create table grupo_gestion(
 
 insert into persona values (1,111,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1995-02-12');
 insert into persona values (2,222,'Sebastian','Alvarez','Roca',72520129,'sebasalvarez@gmail.com','1985-08-26');
-insert into persona values (3,333,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1988-10-12');
+insert into persona values (3,333,'Pablo','Ricaldi','Moron',72520129,'pabloricaldi@gmail.com','1988-10-12');
 insert into persona values (4,444,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1992-04-12');
 insert into persona values (5,555,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1996-07-12');
 
