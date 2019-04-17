@@ -45,7 +45,7 @@ create table departamento(
 create table cargo(
 	id int primary key,
 	nombre varchar(30) not null,
-	estado varchar(30) not null,
+	estado bit not null,
 	idDepartamento int not null,
 	foreign key (idDepartamento) references departamento (id)
 );
@@ -64,7 +64,7 @@ create table intervaloDePago(
 	nombre varchar(40) not null
 );
 
-create table metodoPago(
+create table metodoDePago(
 	id int primary key,
 	nombre varchar(40) not null,
 	monto float not null,
@@ -87,7 +87,7 @@ create table pagoDeCuota(
 	fecha date not null,
 	idMetodoDePago int not null,
 	nroCuota int not null,
-	foreign key (idMetodoDePago,nroCuota) references cuota(idMetodoDePago,id)
+	foreign key (idMetodoDePago,nroCuota) references cuota(idMetodoDePago,nro)
 );
 
 create table notaVenta(
@@ -96,9 +96,9 @@ create table notaVenta(
 	codigoAdministrativo int not null,
 	codigoAlumno int not null,
 	idMetodoPago int not null,
-	foreign key (codigoAdministrativo) references personalAdministrativo (codigoPersona),
-	foreign key (codigoAlumno) references alumno (codigoPersona),
-	foreign key (idMetodoPago) references metodoPago (id)
+	foreign key (codigoAdministrativo) references personalAdministrativo(codigo),
+	foreign key (codigoAlumno) references alumno (codigo),
+	foreign key (idMetodoPago) references metodoDePago (id)
 );
 
 create table docente(
@@ -158,15 +158,20 @@ create table grupo(
 	foreign key(idHorario)references horario(id),
 	foreign key(nroGestion)references gestion(nro)
 );
+insert into persona values
+(1,111,'Alumno','Torrez','Aramayo',75364642,'jroge@gmail.com','2019-01-01',1,0,0);
+insert into persona values
+(2,222,'Docente','Torrez','Aramayo',75364642,'jroge@gmail.com','2019-01-01',0,1,0);
+insert into persona values
+(3,333,'Trabajador','Torrez','Aramayo',75364642,'jroge@gmail.com','2019-01-01',0,0,1);
+
+delete from cargo;
+select*from departamento;
+insert into departamento values(1,'Departamento de ventas',0);
+insert into departamento values(2,'Departamento de marketing',0);
+insert into cargo values(1,'Vendedor 1',0,1)
+insert into cargo values(2,'Nego 1',0,2)
+delete from cargo where id=1
 
 
-insert into persona values (1,111,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1995-02-12');
-insert into persona values (2,222,'Sebastian','Alvarez','Roca',72520129,'sebasalvarez@gmail.com','1985-08-26');
-insert into persona values (3,333,'Pablo','Ricaldi','Moron',72520129,'pabloricaldi@gmail.com','1988-10-12');
-insert into persona values (4,444,'Luisa','Gallardo','Suarez',72520129,'luisagallardo@gmail.com','1992-04-12');
-insert into persona values (5,555,'Carlos','Sandoval','Padilla',72520129,'carlossandoval@gmail.com','1996-07-12');
-insert into persona values (6,666,'Juan','Zegarra','Lopez',72520129,'juanzegarra@gmail.com','1991-06-11');
-insert into persona values (7,777,'Norma','Soliz','Lujan',72520129,'normasoliz@gmail.com','1987-12-22');
-insert into persona values (8,888,'Karen','Perez','Herrera',76385791,'karenperez@gmail.com','1995-02-18');
 
-insert into alumno values (11,1,);
