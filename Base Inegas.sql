@@ -156,4 +156,4 @@ create table grupo_gestion(
 	foreign key (nroGestion) references gestion (nro)
 );
 
-
+insert into persona values ();
