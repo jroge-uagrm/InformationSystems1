@@ -53,7 +53,7 @@ create table cargo(
 create table personalAdministrativo(
 	codigo int primary key,
 	codigoPersona int not null,
-	profesion varchar(40),
+	añosExperiencia int,
 	idCargo int not null,
 	foreign key (codigoPersona) references persona (codigo),
 	foreign key (idCargo) references cargo (id)
@@ -73,6 +73,23 @@ create table metodoPago(
 	foreign key(idIntervaloDePago) references intervaloDePago(id)
 );
 
+create table cuota(
+	idMetodoDePago int,
+	nro int,
+	monto float not null,
+	estado varchar(40) not null,
+	primary key(idMetodoDePago, nro),
+	foreign key(idMetodoDePago) references metodoDePago(id)
+);
+
+create table pagoDeCuota(
+	nro int primary key,
+	fecha date not null,
+	idMetodoDePago int not null,
+	nroCuota int not null,
+	foreign key (idMetodoDePago,nroCuota) references cuota(idMetodoDePago,id)
+);
+
 create table notaVenta(
 	nro int primary key,
 	fecha date not null,
@@ -84,19 +101,9 @@ create table notaVenta(
 	foreign key (idMetodoPago) references metodoPago (id)
 );
 
-create table cuota(
-	idMetodoDePago int,
-	nro int,
-	monto float not null,
-	estado varchar(40) not null,
-	idIntervaloDePago int not null,
-	primary key(idMetodoDePago, id),
-	foreign key(idMetodoDePago) references metodoDePago(id),
-	foreign key(idIntervaloDePago) references intervaloDePago(id)
-);
-
 create table docente(
-	codigoPersona int primary key,
+	codigo int primary key,
+	codigoPersona int,
 	profesion varchar(40) not null,
 	foreign key(codigoPersona)references persona(codigo)
 );
