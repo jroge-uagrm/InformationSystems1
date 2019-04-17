@@ -86,7 +86,7 @@ create table notaVenta(
 
 create table cuota(
 	idMetodoDePago int,
-	id int,
+	nro int,
 	monto float not null,
 	estado varchar(40) not null,
 	idIntervaloDePago int not null,
