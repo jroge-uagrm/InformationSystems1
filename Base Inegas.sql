@@ -24,18 +24,10 @@ create table alumno(
 
 create table usuario(
 	nombre varchar(30) not null,
-<<<<<<< HEAD
 	contraseï¿½a varchar(30) not null,
-	codigoPersona int not null,
-	idPrivilegio int not null,
-	foreign key(codigoPersona)references persona(codigo),
-	foreign key(idPrivilegio)references privilegio(id)
-=======
-	contraseña varchar(30) not null,
 	privilegio int not null,
 	codigoPersona int not null,
 	foreign key(codigoPersona)references persona(codigo)
->>>>>>> f74710ab395b1d53f49056ead5565e36e7ca0956
 );
 
 create table departamento(

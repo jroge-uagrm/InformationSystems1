@@ -1,4 +1,5 @@
-﻿/*1 Verificar que el alumno a registrar
+﻿use SIinegas;
+/*1 Verificar que el alumno a registrar
 	sea de tipo alumno*/
 create trigger verificarTipoAlumno
 on alumno for insert as
@@ -169,6 +170,24 @@ begin
 	insert into cuota values(@idMetodo,@contador+@cuotasExistentes,@montoPorCuota,0)
 	set @contador=@contador+1
 end
+
+/*12No eliminar a los trabajadores
+	que realizaron al menos una nota de venta*/
+create trigger noEliminarTrabajador
+on personalAdministrativo for delete as
+declare @codigoTrabajador int
+set @codigoTrabajador = (select codigo from deleted)
+if((select count(*)
+	from notaVenta
+	where codigoPersonalAdministrativo=@codigoTrabajador)>0)
+begin
+update personalAdministrativo set idCargo=2 where codigo=@codigoTrabajador
+end
+
+
+
+
+
 
 
 
