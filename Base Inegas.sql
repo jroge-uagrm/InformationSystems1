@@ -42,6 +42,8 @@ create table cargo(
 	estado bit not null,
 	idDepartamento int not null,
 	foreign key (idDepartamento) references departamento (id)
+	on update cascade
+	on delete cascade
 );
 
 create table personalAdministrativo(
@@ -254,8 +256,23 @@ insert into grupo values (3,'SC',3,2,1,2);
 insert into grupo values (4,'SX',4,4,4,2);
 insert into grupo values (5,'SW',2,1,3,1);
 
+update persona set nombre='Carmen' where ci=888;
 
-update 
+update usuario set nombre='Carmen' where codigoPersona=8;
+
+update docente set profesion='Ingeniero Industrial' where codigoPersona=5;
+
+update horario set horaInicio=15 where id=1;
+
+update horario set horaFin=17 where id=1;
+
+update curso set duracion=1 where codigo=4;
+
+update notaDeVenta set fecha='2018-01-20' where nro=3;
+
+
+delete from usuario where nombre='Norma';
+
 
 
 
