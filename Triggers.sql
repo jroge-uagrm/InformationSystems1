@@ -92,7 +92,7 @@ declare @idCarg int
 set @idCarg=(select idCargo from inserted)
 update cargo set estado=1 where id=@idCarg
 
-/*8	Actualizar un cargo a estado inactivo cuando
+/*9	Actualizar un cargo a estado inactivo cuando
 	no existan personas en ese cargo*/
 create trigger actualizarCargoB
 on personalAdministrativo for delete as
@@ -113,13 +113,10 @@ end
 close cursorCargos
 deallocate cursorCargos
 
-
-
-
-/*9	Validar que la persona que realiza 
+/*10Validar que la persona que realiza 
 	la venta pertenece al departamento de ventas*/
 create trigger validarTrabajadorEnVenta
-on notaVenta for insert as
+on notaDeVenta for insert as
 if((select departamento.nombre
 	from personalAdministrativo,cargo,departamento,inserted
 	where inserted.codigoPersonalAdministrativo=personalAdministrativo.codigo and
@@ -130,35 +127,18 @@ begin
 	rollback tran
 end
 
-/*10Reducir el monto de un metodo de pago cuando se 
-	inserta un pago de una cuota de dicho metodo de pago
-	y la cuota se actualiza a pagada*/
-create trigger reducirMonto
-on pagoDeCuota for insert as
-declare @monto float
-declare @idMetodoPago float
-declare @nroCuota int
-set @nroCuota=(select nroCuota from inserted)
-set @monto=(select monto 
-			from inserted,cuota 
-			where inserted.nroCuota=cuota.nro)
-set @idMetodoPago=(select idMetodoDePago
-					from inserted)
-update metodoDePago set monto=monto-@monto where id=@idMetodoPago
-update cuota set estado=1 where nro=@nroCuota
-
 /*11Crear N cuotas en funcion a su plazo 
 	y a su intervalo de pago*/
 create trigger crearCuotas
-on metodoDePago for insert as
-declare @idMetodo int
+on notaDeVenta for insert as
+declare @nroNota int
 declare @cantidadDeCuotas int
 declare @plazoACumplir int
 declare @intervalo int
 declare @montoPorCuota float
-set @idMetodo=(select id from inserted)
-set @plazoACumplir=(select plazo from inserted)
-set @intervalo=(select idIntervaloDePago from inserted)
+set @nroNota=(select nro from inserted)
+set @plazoACumplir=(select plazo from inserted, metodoDePago where inserted.idMetodoPago=id)
+set @intervalo=(select idIntervaloDePago from inserted, metodoDePago where inserted.idMetodoPago=id)
 set @cantidadDeCuotas=( 12 * @plazoACumplir ) / @intervalo
 set @montoPorCuota=(select monto from inserted)/@cantidadDeCuotas
 declare @contador int
@@ -167,7 +147,7 @@ set @cuotasExistentes=(select count(*)from cuota)
 set @contador=1
 while(@contador<=@cantidadDeCuotas)
 begin
-	insert into cuota values(@idMetodo,@contador+@cuotasExistentes,@montoPorCuota,0)
+	insert into cuota values(@nroNota,@contador+@cuotasExistentes,@montoPorCuota,0)
 	set @contador=@contador+1
 end
 
@@ -175,13 +155,18 @@ end
 	que realizaron al menos una nota de venta*/
 create trigger noEliminarTrabajador
 on personalAdministrativo for delete as
+rollback tran
 declare @codigoTrabajador int
 set @codigoTrabajador = (select codigo from deleted)
 if((select count(*)
-	from notaVenta
+	from notaDeVenta
 	where codigoPersonalAdministrativo=@codigoTrabajador)>0)
 begin
 update personalAdministrativo set idCargo=2 where codigo=@codigoTrabajador
+end
+else
+begin
+delete from personalAdministrativo where codigo=@codigoTrabajador
 end
 
 

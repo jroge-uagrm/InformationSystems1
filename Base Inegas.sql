@@ -24,7 +24,7 @@ create table alumno(
 
 create table usuario(
 	nombre varchar(30) not null,
-	contraseï¿½a varchar(30) not null,
+	contraseña varchar(30) not null,
 	privilegio int not null,
 	codigoPersona int not null,
 	foreign key(codigoPersona)references persona(codigo)
@@ -49,7 +49,7 @@ create table cargo(
 create table personalAdministrativo(
 	codigo int primary key,
 	codigoPersona int not null,
-	aï¿½osExperiencia int,
+	añosExperiencia int,
 	idCargo int not null,
 	foreign key (codigoPersona) references persona (codigo),
 	foreign key (idCargo) references cargo (id)
