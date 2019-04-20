@@ -29,11 +29,11 @@ create table privilegio(
 
 create table usuario(
 	nombre varchar(30) not null,
-	contraseña varchar(30) not null,
+	contraseï¿½a varchar(30) not null,
 	codigoPersona int not null,
 	idPrivilegio int not null,
 	foreign key(codigoPersona)references persona(codigo),
-	foreign key(idPrivilegio)references privilegio(id) 
+	foreign key(idPrivilegio)references privilegio(id)
 );
 
 create table departamento(
@@ -53,7 +53,7 @@ create table cargo(
 create table personalAdministrativo(
 	codigo int primary key,
 	codigoPersona int not null,
-	añosExperiencia int,
+	aï¿½osExperiencia int,
 	idCargo int not null,
 	foreign key (codigoPersona) references persona (codigo),
 	foreign key (idCargo) references cargo (id)
