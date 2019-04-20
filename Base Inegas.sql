@@ -157,10 +157,12 @@ create table grupo(
 	codigoCurso int not null,
 	idHorario int not null,
 	nroGestion int not null,
+	codigoDocente int not null,
 	foreign key(nroAula)references aula(nro),
 	foreign key(codigoCurso)references curso(codigo),
 	foreign key(idHorario)references horario(id),
-	foreign key(nroGestion)references gestion(nro)
+	foreign key(nroGestion)references gestion(nro),
+	foreign key(codigoDocente)references docente(codigo)
 );
 
 insert into persona values (1,111,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1995-02-12',1,0,0);
@@ -211,7 +213,7 @@ insert into metodoDePago values (2,'Lento',2500,1,1);
 insert into metodoDePago values (3,'Medio',2000,1,2);
 
 insert into cuota values (1,1,1000);
-insert into cuota values (2,2,500)
+insert into cuota values (2,2,500);
 insert into cuota values (3,3,500);
 insert into cuota values (2,4,500);
 insert into cuota values (2,5,1000);
