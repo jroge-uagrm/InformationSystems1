@@ -22,18 +22,20 @@ create table alumno(
 	foreign key(codigoPersona)references persona(codigo)
 );
 
-create table privilegio(
-	id int primary key,
-	nivel int not null
-);
-
 create table usuario(
 	nombre varchar(30) not null,
+<<<<<<< HEAD
 	contraseï¿½a varchar(30) not null,
 	codigoPersona int not null,
 	idPrivilegio int not null,
 	foreign key(codigoPersona)references persona(codigo),
 	foreign key(idPrivilegio)references privilegio(id)
+=======
+	contraseña varchar(30) not null,
+	privilegio int not null,
+	codigoPersona int not null,
+	foreign key(codigoPersona)references persona(codigo)
+>>>>>>> f74710ab395b1d53f49056ead5565e36e7ca0956
 );
 
 create table departamento(
@@ -180,18 +182,13 @@ insert into alumno values (22,2,'Ingeniero Quimico');
 insert into alumno values (33,3,null);
 insert into alumno values (44,4,'Ingeniero Civil');
 
-insert into privilegio values (1,10);
-insert into privilegio values (2,10);
-insert into privilegio values (3,10);
-insert into privilegio values (4,10);
-
-insert into usuario values ('Abigail','abigail123',1,1);
-insert into usuario values ('Sebastian','sebastian123',2,1);
-insert into usuario values ('Luisa','luisa123',4,2);
-insert into usuario values ('Juan','juan123',6,3);
-insert into usuario values ('Norma','norma123',7,2);
-insert into usuario values ('Karen','karen123',8,4);
-insert into usuario values ('Simon','simon123',9,3);
+insert into usuario values ('Abigail','abigail123',10,1);
+insert into usuario values ('Sebastian','sebastian123',10,2);
+insert into usuario values ('Luisa','luisa123',10,4);
+insert into usuario values ('Juan','juan123',10,6);
+insert into usuario values ('Norma','norma123',10,7);
+insert into usuario values ('Karen','karen123',10,8);
+insert into usuario values ('Simon','simon123',10,9);
 
 insert into departamento values (1,'Departamento de ventas',1);
 insert into departamento values (2,'Departamento de marketing',2);
@@ -264,6 +261,9 @@ insert into grupo values (2,'SA',2,3,1,1);
 insert into grupo values (3,'SC',3,2,1,2);
 insert into grupo values (4,'SX',4,4,4,2);
 insert into grupo values (5,'SW',2,1,3,1);
+
+
+update 
 
 
 
