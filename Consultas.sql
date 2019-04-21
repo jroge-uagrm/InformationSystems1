@@ -93,6 +93,36 @@ where persona.codigo=alumno.codigoPersona and
 		alumno.codigo=notaVenta.codigoAlumno and
 		notaVenta.codigoCurso=curso.codigo
 
+/*13Mostrar la cantidad de inscritos en cada curso*/
+select curso.nombre, count(*) as Inscritos
+from notaDeVenta,curso
+where notaDeVenta.codigoCurso=curso.codigo
+group by curso.nombre
+
+/*14Mostrar la cantidad de grupos en las que dará clases
+	un docente por la mañana*/
+
+
+/*15Mostrar las gestiones en las que un docente dio cursos
+	de postgrado*/
+
+
+/*16Mostrar los alumnos mayores a 30 años que esten inscritos
+	en cursos y que tengan mas de 8 cuotas*/
+
+
+/*17Mostrar los personales administrativos que no tienen usuario
+	(nuevos) y que trabajan en el departamento de ventas*/
+
+
+/*18*/
+
+
+
+select * from notaDeVenta
+select * from intervaloDePago
+select * from metodoDePago
+select * from cuota
 
 
 
