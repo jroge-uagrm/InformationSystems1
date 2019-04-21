@@ -151,30 +151,15 @@ begin
 	set @contador=@contador+1
 end
 
-/*12No eliminar a los trabajadores
-	que realizaron al menos una nota de venta*/
-create trigger noEliminarTrabajador
-on personalAdministrativo for delete as
-rollback tran
-declare @codigoTrabajador int
-set @codigoTrabajador = (select codigo from deleted)
+/*12No añadir un grupo que utiliza la misma aula
+	en el mismo horario de otro grupo*/
+create trigger noAñadirGrupo
+on grupo for insert as
 if((select count(*)
-	from notaDeVenta
-	where codigoPersonalAdministrativo=@codigoTrabajador)>0)
+	from grupo,inserted
+	where grupo.idHorario=inserted.idHorario and
+			grupo.nroAula = inserted.nroAula)>0)
 begin
-update personalAdministrativo set idCargo=2 where codigo=@codigoTrabajador
-end
-else
-begin
-delete from personalAdministrativo where codigo=@codigoTrabajador
-end
-
-
-
-
-
-
-
-
-
-
+	print 'No se puede repetir misma aula en mismo horario';
+	rollback tran;
+end;
