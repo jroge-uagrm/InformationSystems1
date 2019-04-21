@@ -63,27 +63,9 @@ create table intervaloDePago(
 create table metodoDePago(
 	id int primary key,
 	nombre varchar(40) not null,
-	monto float not null,
 	plazo int not null,
 	idIntervaloDePago int not null,
 	foreign key(idIntervaloDePago) references intervaloDePago(id)
-);
-
-create table cuota(
-	idMetodoDePago int,
-	nro int,
-	monto float not null,
-	estado varchar(40) not null,
-	primary key(idMetodoDePago,nro),
-	foreign key(idMetodoDePago) references metodoDePago(id)
-);
-
-create table pagoDeCuota(
-	nro int primary key,
-	fecha date not null,
-	idMetodoDePago int not null,
-	nroCuota int not null,
-	foreign key (idMetodoDePago,nroCuota) references cuota(idMetodoDePago,nro)
 );
 
 create table docente(
@@ -119,6 +101,7 @@ create table curso(
 create table notaDeVenta(
 	nro int primary key,
 	fecha date not null,
+	monto float not null,
 	codigoPersonalAdministrativo int not null,
 	codigoAlumno int not null,
 	idMetodoPago int not null,
@@ -129,6 +112,23 @@ create table notaDeVenta(
 	foreign key (codigoCurso) references curso (codigo)
 );
 
+create table cuota(
+	nroNotaDeVenta int,
+	nro int,
+	monto float not null,
+	estado bit not null,
+	primary key(nroNotaDeVenta,nro),
+	foreign key(nroNotaDeVenta) references notaDeVenta(nro)
+);
+
+create table pagoDeCuota(
+	nro int primary key,
+	fecha date not null,
+	nroNotaDeVenta int not null,
+	nroCuota int not null,
+	foreign key (nroNotaDeVenta,nroCuota) references cuota(nroNotaDeVenta,nro)
+);
+
 create table aula(
 	nro int primary key,
 	ubicacion varchar(30)not null,
@@ -137,8 +137,8 @@ create table aula(
 
 create table horario(
 	id int primary key,
-	horaInicio int not null,
-	horaFin int not null
+	horaInicio varchar(5) not null,
+	horaFin varchar(5) not null
 );
 
 create table gestion(
@@ -171,10 +171,10 @@ insert into persona values (7,777,'Norma','Soliz','Lujan',72520129,'normasoliz@g
 insert into persona values (8,888,'Karen','Perez','Herrera',76385791,'karenperez@gmail.com','1995-02-18',0,0,1);
 insert into persona values (9,999,'Simon','Aguilar','Duran',79230092,'simonaguilar@gmail.com','1995-02-18',0,0,1)
 
-insert into alumno values (11,1,'Ingeniero Petrolero');
-insert into alumno values (22,2,'Ingeniero Quimico');
-insert into alumno values (33,3,null);
-insert into alumno values (44,4,'Ingeniero Civil');
+insert into alumno values (1,1,'Ingeniero Petrolero');
+insert into alumno values (2,2,'Ingeniero Quimico');
+insert into alumno values (3,3,null);
+insert into alumno values (4,4,'Ingeniero Civil');
 
 insert into usuario values ('Abigail','abigail123',10,1);
 insert into usuario values ('Sebastian','sebastian123',10,2);
@@ -184,12 +184,14 @@ insert into usuario values ('Norma','norma123',10,7);
 insert into usuario values ('Karen','karen123',10,8);
 insert into usuario values ('Simon','simon123',10,9);
 
-insert into departamento values (1,'Departamento de ventas',1);
-insert into departamento values (2,'Departamento de marketing',2);
+insert into departamento values (1,'Departamento de ventas',0);
+insert into departamento values (2,'Departamento de marketing',0);
+insert into departamento values (3,'Departamento de R.R.H.H.',0);
 
 insert into cargo values (1,'Ejecutivo de ventas',1,1);
-insert into cargo values (2,'Director de publicidad',1,2);
+insert into cargo values (4,'Director de publicidad',1,2);
 insert into cargo values (3,'Director de ventas',1,2);
+insert into cargo values (2,'Desempleado',0,3);
 
 insert into personalAdministrativo values (1,7,2,1);
 insert into personalAdministrativo values (2,8,4,3);
@@ -197,64 +199,58 @@ insert into personalAdministrativo values (3,9,3,2);
 
 insert into intervaloDePago values (1,'Mensual');
 insert into intervaloDePago values (2,'Bimestral');
-insert into intervaloDePago values (3,'Semestral');
+insert into intervaloDePago values (3,'Trimestral');
+insert into intervaloDePago values (6,'Semestral');
+insert into intervaloDePago values (10,'Una vez');
 
-insert into metodoDePago values (1,'Rapido',2000,1,3);
-insert into metodoDePago values (2,'Lento',2500,1,1);
-insert into metodoDePago values (3,'Medio',2000,1,2);
+insert into metodoDePago values (1,'Rapido',1,2);
+insert into metodoDePago values (2,'Medio',2,2);
+insert into metodoDePago values (3,'Lento',3,2);
 
-insert into cuota values (1,1,1000);
-insert into cuota values (2,2,500);
-insert into cuota values (3,3,500);
-insert into cuota values (2,4,500);
-insert into cuota values (2,5,1000);
-insert into cuota values (3,6,2000);
-
-insert into pagoDeCuota values (1,'2018-02-03',1,1);
-insert into pagoDeCuota values (2,'2018-02-03',2,2);
-insert into pagoDeCuota values (3,'2018-02-03',3,3);
-insert into pagoDeCuota values (4,'2018-02-03',2,4);
-insert into pagoDeCuota values (5,'2018-02-03',2,5);
-insert into pagoDeCuota values (6,'2018-02-03',3,6);
+/*LAS CUOTAS SE INSERTAN AUTOMATICAMENTE CON UN TRIGGER*/
 
 insert into docente values (1,5,'Ingeniero Petrolero');
 insert into docente values (2,6,'Ingeniero Petrolero');
 
-insert into tipo values (1,'Practico');
-insert into tipo values (2,'Teorico');
+insert into tipo values (1,'Continuo');
+insert into tipo values (2,'Postgrado');
 
 insert into docente_tipo values (1,2);
 insert into docente_tipo values (2,1);
 insert into docente_tipo values (2,2);
 
-insert into curso values (1,'x',3,2500,25,2);
-insert into curso values (2,'x',1,2000,20,1);
-insert into curso values (3,'x',2,2000,25,1);
-insert into curso values (4,'x',3,3000,25,2)
+insert into curso values (1,'Excel Basico',3,2500,25,1);
+insert into curso values (2,'Word Avanzado',1,2000,20,1);
+insert into curso values (3,'Maestria en Procesos',2,2000,25,2);
+insert into curso values (4,'Maestria en escabacion',3,3000,25,2)
 
-insert into notaDeventa values (1,'2018-01-26',7,1,1,3);
-insert into notaDeventa values (2,'2018-01-26',8,2,2,4);
-insert into notaDeventa values (3,'2018-01-26',9,3,3,1);
-insert into notaDeventa values (4,'2018-01-26',8,4,1,2);
+insert into notaDeventa values (1,'2018-01-26',2500,1,1,1,1);
+insert into notaDeventa values (2,'2018-01-26',2000,1,2,2,2);
+insert into notaDeventa values (3,'2018-01-26',2000,1,3,3,3);
+insert into notaDeventa values (4,'2018-01-26',3000,1,4,1,4);
 
 insert into aula values (1,'Primer piso',25);
 insert into aula values (2,'Segundo piso',20);
 insert into aula values (3,'Segundo piso',25);
 insert into aula values (4,'Tercer piso',25);
 
-insert into horario values (1,7,9);
-insert into horario values (2,8,10);
-insert into horario values (3,9,11);
-insert into horario values (4,13,15);
+insert into horario values (1,'10:00','12:00');
+insert into horario values (2,'15:00','18:00');
+insert into horario values (3,'20:00','22:00');
 
 insert into gestion values (1,'1-2018');
 insert into gestion values (2,'2-2018');
 
-insert into grupo values (1,'SB',1,1,2,1);
-insert into grupo values (2,'SA',2,3,1,1);
-insert into grupo values (3,'SC',3,2,1,2);
-insert into grupo values (4,'SX',4,4,4,2);
-insert into grupo values (5,'SW',2,1,3,1);
+insert into grupo values (1,'Mañana',1,1,1,1,1);
+insert into grupo values (2,'Tarde',2,3,2,1,2);
+insert into grupo values (3,'Noche',3,2,3,2,1);
+insert into grupo values (4,'Mañana',4,4,1,2,2);
+insert into grupo values (5,'Tarde',2,1,2,1,2);
+
+
+delete from personalAdministrativo where codigo=1
+select * from personalAdministrativo
+
 
 update persona set nombre='Carmen' where ci=888;
 
@@ -262,9 +258,9 @@ update usuario set nombre='Carmen' where codigoPersona=8;
 
 update docente set profesion='Ingeniero Industrial' where codigoPersona=5;
 
-update horario set horaInicio=15 where id=1;
+update horario set horaInicio='15:00' where id=1;
 
-update horario set horaFin=17 where id=1;
+update horario set horaFin='17:00' where id=1;
 
 update curso set duracion=1 where codigo=4;
 
@@ -272,6 +268,14 @@ update notaDeVenta set fecha='2018-01-20' where nro=3;
 
 
 delete from usuario where nombre='Norma';
+
+delete from usuario where nombre='Simon';
+
+delete from aula where nro=3;
+
+
+
+
 
 
 
