@@ -184,14 +184,50 @@ from horario,grupo,curso,aula
 where horario.id=grupo.idHorario and grupo.codigocurso=curso.codigo
 		and aula.nro=grupo.nroAula
 
+/*25Mostrar a los alumnos que terminaron de pagar todas sus cuotas*/
+select persona.nombre,persona.apellidoPaterno,persona.ci
+from alumno,notaDeVenta,cuota,persona
+where persona.codigo=alumno.codigoPersona and
+		notaDeVenta.codigoAlumno=alumno.codigo and
+		cuota.nroNotaDeVenta not in(
+			select nroNotaDeVenta
+			from cuota
+			where cuota.estado=0)
 
-select * from notaDeVenta
-select * from intervaloDePago
-select * from metodoDePago
-select * from cuota
+/*26Mostrar todos los cursos que se dieron por gestion*/
+select gestion.nombre,curso.codigo,curso.nombre
+from gestion,curso,grupo
+where gestion.nro=grupo.nroGestion and
+		grupo.codigoCurso=curso.codigo
 
+/*27Mostrar a los alumnos que pagaron en efectivo*/
+select alumno.codigo,persona.nombre,persona.apellidoPaterno
+from alumno,persona,notaDeVenta,metodoDePago
+where persona.codigo=alumno.codigoPersona and
+		notaDeVenta.codigoAlumno=alumno.codigo and
+		notaDeVenta.idMetodoPago=metodoDePago.id and
+		metodoDePago.idIntervaloDePago=10
 
+/*28Mostrar a las personas que son docentes y alumnos*/
+select nombre,apellidoPaterno,ci
+from persona,alumno,docente
+where persona.codigo=alumno.codigoPersona and
+		persona.codigo=docente.codigoPersona
 
+/*29Mostrar los horarios disponibles de cada aula*/
+select aula.nro,aula.ubicacion,horario.horaInicio,horario.horaFin
+from aula,horario,grupo
+where aula.nro=grupo.nroAula and
+		grupo.idHorario<>horario.id
+
+/*30Mostrar la cantidad de ventas de cursos
+	de postgrado en el mes actual*/
+select count(*)
+from alumno,notaDeVenta,curso,tipo
+where alumno.codigo=notaDeVenta.codigoAlumno and
+		notaDeVenta.codigoCurso=curso.codigo and
+		curso.idTipo=2 and
+		month(notaDeVenta.fecha)=month(getdate())
 
 
 
