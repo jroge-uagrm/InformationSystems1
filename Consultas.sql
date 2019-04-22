@@ -94,29 +94,95 @@ where persona.codigo=alumno.codigoPersona and
 		notaVenta.codigoCurso=curso.codigo
 
 /*13Mostrar la cantidad de inscritos en cada curso*/
-select curso.nombre, count(*) as Inscritos
+select curso.nombre, count(*) as inscritos
 from notaDeVenta,curso
 where notaDeVenta.codigoCurso=curso.codigo
 group by curso.nombre
 
 /*14Mostrar la cantidad de grupos en las que dará clases
-	un docente por la mañana*/
+	un docente por la tarde*/
+select persona.nombre,count(*)as cantidadGrupos
+from grupo,docente,persona
+where docente.codigo=grupo.codigoDocente and 
+		docente.codigoPersona=persona.codigo and
+		grupo.nombre='Tarde'
+group by persona.nombre
 
-
-/*15Mostrar las gestiones en las que un docente dio cursos
+/*15Mostrar las gestiones en las que el docente Juan dio cursos
 	de postgrado*/
+select gestion.nro,gestion.nombre
+from gestion,grupo,docente,tipo,docente_tipo,persona
+where gestion.nro=grupo.nroGestion and
+		docente.codigo=grupo.codigoDocente and
+		docente.codigo=docente_tipo.codigoDocente and
+		docente_tipo.idTipo=tipo.id and 
+		docente.codigoPersona=persona.codigo and
+		persona.nombre='Juan' and tipo.nombre='Postgrado'
 
+/*16Mostrar los alumnos que esten inscritos
+	en cursos Continuos*/
+	select persona.nombre
+	from persona,alumno,notaDeVenta,curso,tipo
+	where persona.codigo=alumno.codigoPersona and 
+			alumno.codigo=notaDeVenta.codigoAlumno and
+			notaDeVenta.codigoCurso=curso.codigo and
+			curso.idTipo=tipo.id and tipo.nombre='Continuo'
 
-/*16Mostrar los alumnos mayores a 30 años que esten inscritos
-	en cursos y que tengan mas de 8 cuotas*/
+/*17Mostrar los personales administrativos ordenados por el apellido que
+	no tienen usuario(nuevos) y trabajan en el departamento de ventas*/
+select persona.nombre,persona.apellidoPaterno
+from persona,personalAdministrativo,usuario,cargo,departamento
+where persona.codigo=personalAdministrativo.codigo and 
+		persona.codigo=usuario.codigoPersona and cargo.id=personalAdministrativo.idCargo
+		and cargo.idDepartamento=departamento.id and departamento.nombre='Departamento de Ventas'
+order by persona.apellidoPaterno asc
 
+/*18Mostrar la cantidad de alumnos que hay en cada aula*/
+select aula.nro,aula.ubicacion,aula.capacidad, count(*)as cantidadAlumnos
+from persona,alumno,notaDeVenta,curso,grupo,aula
+where persona.codigo=alumno.codigoPersona and alumno.codigo=notaDeVenta.codigoAlumno
+		and notaDeVenta.codigoCurso=curso.codigo and curso.codigo=grupo.codigoCurso
+		and grupo.nroAula=aula.nro
+group by aula.nro,aula.ubicacion,aula.capacidad
 
-/*17Mostrar los personales administrativos que no tienen usuario
-	(nuevos) y que trabajan en el departamento de ventas*/
+/*19Mostrar los cursos con sus respectivas aulas en las que se dará clases en la tarde*/
+select curso.nombre,aula.nro,aula.ubicacion
+from curso,grupo,aula
+where curso.codigo=grupo.codigoCurso and grupo.nroAula=aula.nro and grupo.nombre='Tarde'
 
+/*20Mostrar los personales aministrativos que trabajan en el departamento de ventas
+	que tengan mas de 30 años*/
+select persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
+from persona,personalAdministrativo,cargo,departamento
+where persona.codigo=personalAdministrativo.codigoPersona and personalAdministrativo.idCargo=cargo.id
+		and cargo.idDepartamento=departamento.id and departamento.nombre='Departamento de venta' and
+		year(getdate())-year(persona.fechaNacimiento)>30
 
-/*18*/
+/*21Monto total ganado por cada curso*/
+select curso.codigo,curso.nombre,sum(notaDeVenta.monto)as total
+from notaDeVenta,curso
+where notaDeVenta.codigoCurso=curso.codigo
+group by curso.codigo,curso.nombre
 
+/*22Mostrar monto pagado de cada nota de venta hasta la fecha*/
+select notaDeVenta.nro,notaDeVenta.fecha,sum(cuota.monto)as totalPagado
+from notaDeVenta,cuota,pagoDeCuota
+where notaDeVenta.nro=cuota.nroNotaDeVenta and cuota.nro=pagoDeCuota.nroCuota
+		and getdate()>=pagoDeCuota.fecha
+group by notaDeVenta.nro,notaDeVenta.fecha
+
+/*23Mostrar los cursos que se vendieron en la fecha 2018-01-26 con
+	método de pago Rapido*/
+select curso.codigo,curso.nombre
+from notaDeVenta,curso,metodoDePago
+where notaDeVenta.codigoCurso=curso.codigo and notaDeVenta.idMetodoPago=metodoDePago.id
+		and notaDeVenta.fecha='2018-01-26' and metodoDePago.nombre='Rapido'
+
+/*24Mostrar los horarios y aula de cada curso*/
+select curso.nombre,horario.horaInicio,horario.horaFin,aula.nro
+from horario,grupo,curso,aula
+where horario.id=grupo.idHorario and grupo.codigocurso=curso.codigo
+		and aula.nro=grupo.nroAula
 
 
 select * from notaDeVenta
