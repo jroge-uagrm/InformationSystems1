@@ -94,7 +94,7 @@ return (select persona.codigo, persona.ci,persona.nombre,persona.apellidoPaterno
 		where persona.codigo=alumno.codigoPersona and alumno.codigo=notaDeVenta.codigoAlumno
 				and curso.codigo=notaDeVenta.codigoCurso and curso.nombre=@nombreCurso)
 
-/*Ver los vendedores que vendieron mas de dos veces en el
+/*6 Ver los vendedores que vendieron mas de dos veces en el
 	mismo dia en algun mes*/
 create function vendedoresQueVendieronMasDeDosVeces(@mes int)
 returns table
