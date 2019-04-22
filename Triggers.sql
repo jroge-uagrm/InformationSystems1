@@ -61,6 +61,7 @@ declare @idDpto int
 	 	fetch from idDeptoCursor into @idDpto	
 	end
 	close idDeptoCursor
+	deallocate idDeptoCursor
 
 /*6	Verificar que la cantidad de cargos incial
 	al crear un departamento sea 0*/
