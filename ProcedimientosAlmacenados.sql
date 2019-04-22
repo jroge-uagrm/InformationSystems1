@@ -1,4 +1,5 @@
-﻿/*1 Obtener la cantidad de cupos disponibles
+﻿use SIinegas
+/*1 Obtener la cantidad de cupos disponibles
 	para un curso*/
 create function cuposDisponibles(@codigoCurso int)returns int
 as begin
@@ -78,13 +79,34 @@ as begin
 					pagoDeCuota.nro=@nroPagoDeCuota)
 		fetch from cursorNroPagoDeCuota into @nroPagoDeCuota
 	end
-	close cursorNroPagoDeCuota
+	close cursorNroPagoDeCuot
 	deallocate cursorNroPagoDeCuota
 	return @montoGanado
 end
 select SIinegas.dbo.montoGanado(1)
-/*5 
 
+/*5 Ver la lista de inscritos en un curso*/
+create function listaDeInscritos(@nombreCurso varchar(30))
+returns table
+as
+return (select persona.codigo, persona.ci,persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
+		from persona,alumno,notaDeVenta,curso
+		where persona.codigo=alumno.codigoPersona and alumno.codigo=notaDeVenta.codigoAlumno
+				and curso.codigo=notaDeVenta.codigoCurso and curso.nombre=@nombreCurso)
+
+/*Ver los vendedores que vendieron mas de dos veces en el
+	mismo dia en algun mes*/
+create function vendedoresQueVendieronMasDeDosVeces(@mes int)
+returns table
+as
+return (select persona.codigo,persona.ci,persona.nombre,count(*)as cantidadVentas
+		from persona,departamento,cargo,personalAdministrativo,notaDeVenta
+		where departamento.id=cargo.idDepartamento and cargo.id=personalAdministrativo.idCargo
+				and personalAdministrativo.codigo=notaDeVenta.codigoPersonalAdministrativo and
+				persona.codigo=personalAdministrativo.codigoPersona and
+				month(notaDeVenta.fecha)=@mes and departamento.nombre='Departamento de ventas'
+		group by persona.codigo,persona.ci,persona.nombre
+		having count(*)>2)
 
 
 
