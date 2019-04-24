@@ -113,7 +113,7 @@ create table docente_tipo(
 create table curso(
 	codigo int primary key,
 	nombre varchar(30) not null,
-	duracion int not null,
+	duracion float not null,
 	costo float not null,
 	cupoTotal int not null,
     cupoDisponible int not null,
@@ -203,10 +203,10 @@ insert into persona values (7,777,'Norma','Soliz','Lujan',72520129,'normasoliz@g
 insert into persona values (8,888,'Karen','Perez','Herrera',76385791,'karenperez@gmail.com','1995-02-18',0,0,1);
 insert into persona values (9,999,'Simon','Aguilar','Duran',79230092,'simonaguilar@gmail.com','1995-02-18',0,0,1);
 
-insert into alumno values (1,1,'Ingeniero Petrolero');
-insert into alumno values (2,2,'Ingeniero Quimico');
-insert into alumno values (3,3,null);
-insert into alumno values (4,4,'Ingeniero Civil');
+insert into alumno values (1,1);
+insert into alumno values (2,2);
+insert into alumno values (3,3);
+insert into alumno values (4,4);
 
 insert into usuario values ('Abigail','abigail123',10,1);
 insert into usuario values ('Sebastian','sebastian123',10,2);
@@ -220,29 +220,23 @@ insert into departamento values (1,'Departamento de ventas',0);
 insert into departamento values (2,'Departamento de marketing',0);
 insert into departamento values (3,'Departamento de R.R.H.H.',0);
 
-insert into cargo values (1,'Ejecutivo de ventas',1,1);
-insert into cargo values (4,'Director de publicidad',1,2);
-insert into cargo values (3,'Director de ventas',1,2);
+insert into cargo values (1,'Ejecutivo de ventas',0,1);
+insert into cargo values (4,'Director de publicidad',0,2);
+insert into cargo values (3,'Director de ventas',0,2);
 insert into cargo values (2,'Desempleado',0,3);
 
-insert into personalAdministrativo values (1,7,2,1);
-insert into personalAdministrativo values (2,8,4,3);
-insert into personalAdministrativo values (3,9,3,2);
+insert into estadoCivil values(1,'Soltero');
+insert into estadoCivil values(2,'Casado');
+insert into estadoCivil values(3,'Separado');
+insert into estadoCivil values(4,'Divorciado');
+insert into estadoCivil values(5,'Viudo');
 
-insert into intervaloDePago values (1,'Mensual');
-insert into intervaloDePago values (2,'Bimestral');
-insert into intervaloDePago values (3,'Trimestral');
-insert into intervaloDePago values (6,'Semestral');
-insert into intervaloDePago values (10,'Una vez');
+insert into personalAdministrativo values (1,7,2,1,0,'Radial 13, Quinto anillo',getdate());
+insert into personalAdministrativo values (2,8,4,2,3,'Radial 13, Quinto anillo',getdate());
+insert into personalAdministrativo values (3,9,3,5,2,'Radial 13, Quinto anillo',getdate());
 
-insert into metodoDePago values (1,'Rapido',1,2);
-insert into metodoDePago values (2,'Medio',2,2);
-insert into metodoDePago values (3,'Lento',3,2);
-
-/*LAS CUOTAS SE INSERTAN AUTOMATICAMENTE CON UN TRIGGER*/
-
-insert into docente values (1,5,'Ingeniero Petrolero');
-insert into docente values (2,6,'Ingeniero Petrolero');
+insert into docente values (1,5,'UDABOL','Cuarto anillo, Av. Beni');
+insert into docente values (2,6,'TIGO','Quinto anillo, Doble via a la guardia');
 
 insert into tipo values (1,'Continuo');
 insert into tipo values (2,'Postgrado');
