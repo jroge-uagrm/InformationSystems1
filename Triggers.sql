@@ -21,7 +21,7 @@ if((select persona.tipoDocente
 begin
 	print 'No es de tipo docente'
 	rollback tran
-end
+end;
 
 /*3 Verificar que el trabajador a registrar
 	sea de tipo trabajador*/
@@ -33,7 +33,7 @@ if((select persona.tipoTrabajador
 begin
 	print 'No es de tipo trabajador'
 	rollback tran
-end
+end;
 
 /*4 Aumentar la cantidad de cargos en un departamento
 	al añadir un nuevo cargo*/
@@ -43,7 +43,7 @@ declare @idDpto int
 set @idDpto=(select idDepartamento from inserted)
 	update departamento 
 	set cantidadCargos=cantidadCargos+1 
-	where departamento.id=@idDpto
+	where departamento.id=@idDpto;
 
 /*5 Disminuir la cantidad de cargos en un departamento
 	al eliminar un cargo*/
@@ -60,8 +60,8 @@ declare @idDpto int
 		where departamento.id=@idDpto
 	 	fetch from idDeptoCursor into @idDpto	
 	end
-	close idDeptoCursor
-	deallocate idDeptoCursor
+	close idDeptoCursor;
+	deallocate idDeptoCursor;
 
 /*6	Verificar que la cantidad de cargos incial
 	al crear un departamento sea 0*/
@@ -71,8 +71,8 @@ if((select cantidadCargos
 	from inserted)!=0)
 begin
 	print 'Cantidad de cargos debe empezar con 0'
-	rollback tran
-end
+	rollback tran;
+end;
 
 /*7	Verificar que al crear un cargo
 	este cargo inicia con estado inactivo (0)*/
@@ -83,7 +83,7 @@ if((select estado
 begin
 	print 'El estado del cargo debe iniciar como inactivo'
 	rollback tran
-end
+end;
 
 /*8	Actualizar un cargo a estado activo cuando
 	se inserta a una persona en ese cargo*/
@@ -91,7 +91,7 @@ create trigger actualizarCargo
 on personalAdministrativo for insert as
 declare @idCarg int
 set @idCarg=(select idCargo from inserted)
-update cargo set estado=1 where id=@idCarg
+update cargo set estado=1 where id=@idCarg;
 
 /*9	Actualizar un cargo a estado inactivo cuando
 	no existan personas en ese cargo*/
@@ -112,12 +112,12 @@ begin
 	fetch from cursorCargos into @idCarg
 end
 close cursorCargos
-deallocate cursorCargos
+deallocate cursorCargos;
 
 /*10Validar que la persona que realiza 
 	la venta pertenece al departamento de ventas*/
 create trigger validarTrabajadorEnVenta
-on notaDeVenta for insert as
+on inscripcion for insert as
 if((select departamento.nombre
 	from personalAdministrativo,cargo,departamento,inserted
 	where inserted.codigoPersonalAdministrativo=personalAdministrativo.codigo and
@@ -126,12 +126,12 @@ if((select departamento.nombre
 begin
 	print 'El trabajador no pertenece al depto. de ventas.'
 	rollback tran
-end
+end;
 
 /*11Crear N cuotas en funcion a su plazo 
 	y a su intervalo de pago*/
 create trigger crearCuotas
-on notaDeVenta for insert as
+on inscripcion for insert as
 declare @nroNota int
 declare @cantidadDeCuotas int
 declare @plazoACumplir int

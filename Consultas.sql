@@ -6,7 +6,7 @@ from departamento,cargo,personalAdministrativo,persona
 where persona.codigo=personalAdministrativo.codigoPersona and
 	personalAdministrativo.idCargo=cargo.id and
 	cargo.idDepartamento=departamento.id and
-	departamento.nombre='Departamento de ventas'
+	departamento.nombre='Departamento de ventas';
 
 /*2	Mostrar los docentes que dan cursos de postGrado*/
 select persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
@@ -14,69 +14,69 @@ from docente,tipo,docente_tipo,persona
 where persona.codigo=docente.codigoPersona and
 		docente_tipo.codigoDocente=docente.codigo and
 		docente_tipo.idTipo=tipo.id and
-		tipo.nombre='PostGrado'
+		tipo.nombre='PostGrado';
 
 /*3	Mostrar los cursos del alumno Juan Perez*/
 select curso.codigo,curso.nombre
-from curso,notaVenta,alumno,persona
-where alumno.codigo=notaVenta.codigoAlumno and
-		notaVenta.codigoCurso=curso.codigo and
+from curso,notaDeVenta,alumno,persona
+where alumno.codigo=notaDeVenta.codigoAlumno and
+		notaDeVenta.codigoCurso=curso.codigo and
 		alumno.codigoPersona=persona.codigo and
 		persona.nombre='Juan' and
-		persona.apellidoPaterno='Perez'
+		persona.apellidoPaterno='Perez';
 
-/*4	Mostrar a los trabajadores que realizaron ventas el 2019-02-02*/
-select persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
-from personalAdministrativo,notaVenta,persona
-where notaVenta.codigoPersonalAdministrativo=personalAdministrativo.codigo and
+/*4	Mostrar a los trabajadores que realizaron ventas el 2018-01-26*/
+select distinct persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
+from personalAdministrativo,notaDeVenta,persona
+where notaDeVenta.codigoPersonalAdministrativo=personalAdministrativo.codigo and
 		persona.codigo=personalAdministrativo.codigoPersona and
-		notaVenta.fecha='2019-02-02'
+		notaDeVenta.fecha='2018-01-26';
 
 /*5	Mostrar a los docentes y sus usuarios*/
 select persona.nombre,usuario.nombre
 from persona,usuario,personalAdministrativo
 where persona.codigo=personalAdministrativo.codigoPersona and
-		usuario.codigoPersona=persona.codigo
+		usuario.codigoPersona=persona.codigo;
 
 /*6 Mostrar en cuantos grupos se da el curso Excel basico*/
 select count(*)
 from grupo,curso
 where curso.codigo=grupo.codigoCurso and
-		curso.nombre='Excel basico'
+		curso.nombre='Excel basico';
 
 /*7	Mostrar la cantidad de aulas usadas para todos 
 	los cursos de postGrado*/
 select count(*)
-from aula,grupo,curso
+from aula,grupo,curso,tipo
 where grupo.codigoCurso=curso.codigo and
 		aula.nro=grupo.nroAula and
 		curso.idTipo = tipo.id and
-		tipo.nombre='postGrado'
+		tipo.nombre='postGrado';
 
 /*8 Mostrar todas las ventas que se hicieron 
 con un intervalo de pago Mensual*/
-select  notaVenta.nro,notaVenta.fecha
-from notaVenta,metodoDePago,intervaloDePago
-where notaVenta.idMetodoPago=metodoDePago.id and
+select  notaDeVenta.nro,notaDeVenta.fecha
+from notaDeVenta,metodoDePago,intervaloDePago
+where notaDeVenta.idMetodoPago=metodoDePago.id and
 		metodoDePago.idIntervaloDePago=intervaloDePago.id and
-		intervaloDePago.nombre='Mensual'
+		intervaloDePago.nombre='Mensual';
 
-/*9	Mostrar las aulas en las que Juan Perez pasa clases*/
+/*9	Mostrar las aulas en las que Abigail Gutierrez pasa clases*/
 select aula.nro,aula.ubicacion
-from persona,alumno,notaVenta,curso,grupo,aula
+from persona,alumno,notaDeVenta,curso,grupo,aula
 where	persona.codigo=alumno.codigoPersona and
-		alumno.codigo=notaVenta.codigoAlumno and
-		curso.codigo=notaVenta.codigoCurso and
+		alumno.codigo=notaDeVenta.codigoAlumno and
+		curso.codigo=notaDeVenta.codigoCurso and
 		grupo.codigoCurso=curso.codigo and
-		aula.nro=grupo.nroAula
+		aula.nro=grupo.nroAula and
+        persona.nombre='Abigail' and apellidoPaterno='Gutierrez';
 
 /*10 Mostrar la cantidad de cuotas por pagar
 	 de la nota de venta 3*/
 select count(*)
-from cuota,metodoDePago,notaVenta
-where notaVenta.idMetodoPago=metodoDePago.id and
-		metodoDePago.id=cuota.idMetodoDePago and
-		notaVenta.nro=3 and cuota.estado=0
+from cuota,notadeVenta
+where notadeVenta.nro=cuota.nroNotaDeVenta and
+		notadeVenta.nro=1 and cuota.estado=0;
 
 /*11Mostrar los cursos en los que se inscribieron 
 	mas de 10 personas*/
