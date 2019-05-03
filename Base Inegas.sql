@@ -249,7 +249,7 @@ insert into grupo values (5,'Tarde',2,1,2,1,2);
 
 
 delete from personalAdministrativo where codigo=1
-select * from personalAdministrativo
+select * from grupo
 
 
 update persona set nombre='Carmen' where ci=888;
