@@ -6,7 +6,7 @@ from departamento,cargo,personalAdministrativo,persona
 where persona.codigo=personalAdministrativo.codigoPersona and
 	personalAdministrativo.idCargo=cargo.id and
 	cargo.idDepartamento=departamento.id and
-	departamento.nombre='Departamento de ventas'
+	departamento.nombre='Departamento de ventas';
 
 /*2	Mostrar los docentes que dan cursos de postGrado*/
 select persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
@@ -14,7 +14,7 @@ from docente,tipo,docente_tipo,persona
 where persona.codigo=docente.codigoPersona and
 		docente_tipo.codigoDocente=docente.codigo and
 		docente_tipo.idTipo=tipo.id and
-		tipo.nombre='PostGrado'
+		tipo.nombre='PostGrado';
 
 /*3	Mostrar los cursos del alumno Juan Perez*/
 select curso.codigo,curso.nombre
@@ -23,26 +23,35 @@ where alumno.codigo=notaDeVenta.codigoAlumno and
 		notaDeVenta.codigoCurso=curso.codigo and
 		alumno.codigoPersona=persona.codigo and
 		persona.nombre='Juan' and
-		persona.apellidoPaterno='Perez'
+		persona.apellidoPaterno='Perez';
 
+<<<<<<< HEAD
 /*4	Mostrar a los trabajadores que realizaron ventas el 2019-02-02*/
 select persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
 from personalAdministrativo,notaDeVenta,persona
 where notaDeVenta.codigoPersonalAdministrativo=personalAdministrativo.codigo and
 		persona.codigo=personalAdministrativo.codigoPersona and
 		notaDeVenta.fecha='2019-02-02'
+=======
+/*4	Mostrar a los trabajadores que realizaron ventas el 2018-01-26*/
+select distinct persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
+from personalAdministrativo,notaDeVenta,persona
+where notaDeVenta.codigoPersonalAdministrativo=personalAdministrativo.codigo and
+		persona.codigo=personalAdministrativo.codigoPersona and
+		notaDeVenta.fecha='2018-01-26';
+>>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
 
 /*5	Mostrar a los docentes y sus usuarios*/
 select persona.nombre,usuario.nombre
 from persona,usuario,personalAdministrativo
 where persona.codigo=personalAdministrativo.codigoPersona and
-		usuario.codigoPersona=persona.codigo
+		usuario.codigoPersona=persona.codigo;
 
 /*6 Mostrar en cuantos grupos se da el curso Excel basico*/
 select count(*)
 from grupo,curso
 where curso.codigo=grupo.codigoCurso and
-		curso.nombre='Excel basico'
+		curso.nombre='Excel basico';
 
 /*7	Mostrar la cantidad de aulas usadas para todos 
 	los cursos de postGrado*/
@@ -51,7 +60,11 @@ from aula,grupo,curso,tipo
 where grupo.codigoCurso=curso.codigo and
 		aula.nro=grupo.nroAula and
 		curso.idTipo = tipo.id and
+<<<<<<< HEAD
 		tipo.nombre='Postgrado'
+=======
+		tipo.nombre='postGrado';
+>>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
 
 /*8 Mostrar todas las ventas que se hicieron 
 con un intervalo de pago Mensual*/
@@ -59,24 +72,31 @@ select  notaDeVenta.nro,notaDeVenta.fecha
 from notaDeVenta,metodoDePago,intervaloDePago
 where notaDeVenta.idMetodoPago=metodoDePago.id and
 		metodoDePago.idIntervaloDePago=intervaloDePago.id and
-		intervaloDePago.nombre='Mensual'
+		intervaloDePago.nombre='Mensual';
 
-/*9	Mostrar las aulas en las que Juan Perez pasa clases*/
+/*9	Mostrar las aulas en las que Abigail Gutierrez pasa clases*/
 select aula.nro,aula.ubicacion
 from persona,alumno,notaDeVenta,curso,grupo,aula
 where	persona.codigo=alumno.codigoPersona and
 		alumno.codigo=notaDeVenta.codigoAlumno and
 		curso.codigo=notaDeVenta.codigoCurso and
 		grupo.codigoCurso=curso.codigo and
-		aula.nro=grupo.nroAula
+		aula.nro=grupo.nroAula and
+        persona.nombre='Abigail' and apellidoPaterno='Gutierrez';
 
 /*10 Mostrar la cantidad de cuotas por pagar
 	 de la nota de venta 3*/
 select count(*)
+<<<<<<< HEAD
 from cuota,metodoDePago,notaDeVenta
 where notaDeVenta.idMetodoPago=metodoDePago.id and
 		metodoDePago.id=cuota.idMetodoDePago and
 		notaDeVenta.nro=3 and cuota.estado=0
+=======
+from cuota,notadeVenta
+where notadeVenta.nro=cuota.nroNotaDeVenta and
+		notadeVenta.nro=1 and cuota.estado=0;
+>>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
 
 /*11Mostrar los cursos en los que se inscribieron 
 	mas de 10 personas*/
