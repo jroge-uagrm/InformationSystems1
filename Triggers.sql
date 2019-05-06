@@ -182,3 +182,4 @@ begin
 	print 'No se puede repetir misma aula en mismo horario';
 	rollback tran;
 end;
+

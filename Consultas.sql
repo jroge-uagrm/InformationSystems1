@@ -25,12 +25,21 @@ where alumno.codigo=notaDeVenta.codigoAlumno and
 		persona.nombre='Juan' and
 		persona.apellidoPaterno='Perez';
 
+<<<<<<< HEAD
+/*4	Mostrar a los trabajadores que realizaron ventas el 2019-02-02*/
+select persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
+from personalAdministrativo,notaDeVenta,persona
+where notaDeVenta.codigoPersonalAdministrativo=personalAdministrativo.codigo and
+		persona.codigo=personalAdministrativo.codigoPersona and
+		notaDeVenta.fecha='2019-02-02'
+=======
 /*4	Mostrar a los trabajadores que realizaron ventas el 2018-01-26*/
 select distinct persona.nombre,persona.apellidoPaterno,persona.apellidoMaterno
 from personalAdministrativo,notaDeVenta,persona
 where notaDeVenta.codigoPersonalAdministrativo=personalAdministrativo.codigo and
 		persona.codigo=personalAdministrativo.codigoPersona and
 		notaDeVenta.fecha='2018-01-26';
+>>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
 
 /*5	Mostrar a los docentes y sus usuarios*/
 select persona.nombre,usuario.nombre
@@ -51,7 +60,11 @@ from aula,grupo,curso,tipo
 where grupo.codigoCurso=curso.codigo and
 		aula.nro=grupo.nroAula and
 		curso.idTipo = tipo.id and
+<<<<<<< HEAD
+		tipo.nombre='Postgrado'
+=======
 		tipo.nombre='postGrado';
+>>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
 
 /*8 Mostrar todas las ventas que se hicieron 
 con un intervalo de pago Mensual*/
@@ -74,15 +87,22 @@ where	persona.codigo=alumno.codigoPersona and
 /*10 Mostrar la cantidad de cuotas por pagar
 	 de la nota de venta 3*/
 select count(*)
+<<<<<<< HEAD
+from cuota,metodoDePago,notaDeVenta
+where notaDeVenta.idMetodoPago=metodoDePago.id and
+		metodoDePago.id=cuota.idMetodoDePago and
+		notaDeVenta.nro=3 and cuota.estado=0
+=======
 from cuota,notadeVenta
 where notadeVenta.nro=cuota.nroNotaDeVenta and
 		notadeVenta.nro=1 and cuota.estado=0;
+>>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
 
 /*11Mostrar los cursos en los que se inscribieron 
 	mas de 10 personas*/
 select curso.codigo,curso.nombre
-from curso,notaVenta
-where notaVenta.codigoCurso=curso.codigo
+from curso,notaDeVenta
+where notaDeVenta.codigoCurso=curso.codigo
 group by count(*)
 having count(*)>10
 

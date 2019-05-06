@@ -273,7 +273,12 @@ insert into notaDeventa values (2,'2018-01-26',2000,1,2,2,2);
 insert into notaDeventa values (3,'2018-01-26',2000,1,3,3,3);
 insert into notaDeventa values (4,'2018-01-26',3000,1,4,1,4);
 
+<<<<<<< HEAD
+delete from personalAdministrativo where codigo=1
+select * from grupo
+=======
 delete from personalAdministrativo where codigo=1;
+>>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
 
 select * from personalAdministrativo;
 
