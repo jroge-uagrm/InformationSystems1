@@ -193,6 +193,13 @@ create table pagoDeCuota(
 	foreign key (nroInscripcion,nroCuota) references cuota(nroInscripcion,nro)
 );
 
+insert into profesion values (1,'Ingenieria Industrial');
+insert into profesion values (2,'Ingenieria Quimica');
+insert into profesion values (3,'Ingenieria Petrolera');
+insert into profesion values (4,'Ingenieria en Sistemas');
+
+insert into nivelDeEstudio values (1, 'Educacion superior');
+
 insert into persona values (1,111,'Abigail','Gutierrez','Justiniano',72520129,'abigutierrez@gmail.com','1995-02-12',1,0,0);
 insert into persona values (2,222,'Sebastian','Alvarez','Roca',72520129,'sebasalvarez@gmail.com','1985-08-26',1,0,0);
 insert into persona values (3,333,'Pablo','Ricaldi','Moron',72520129,'pabloricaldi@gmail.com','1988-10-12',1,0,0);
@@ -202,6 +209,26 @@ insert into persona values (6,666,'Juan','Zegarra','Lopez',72520129,'juanzegarra
 insert into persona values (7,777,'Norma','Soliz','Lujan',72520129,'normasoliz@gmail.com','1987-12-22',0,0,1);
 insert into persona values (8,888,'Karen','Perez','Herrera',76385791,'karenperez@gmail.com','1995-02-18',0,0,1);
 insert into persona values (9,999,'Simon','Aguilar','Duran',79230092,'simonaguilar@gmail.com','1995-02-18',0,0,1);
+
+insert into persona_profesion values (1,1);
+insert into persona_profesion values (2,2);
+insert into persona_profesion values (3,3);
+insert into persona_profesion values (4,3);
+insert into persona_profesion values (5,4);
+insert into persona_profesion values (6,2);
+insert into persona_profesion values (7,3);
+insert into persona_profesion values (8,4);
+insert into persona_profesion values (9,3);
+
+insert into persona_nivelDeEstudio values (1,1);
+insert into persona_nivelDeEstudio values (2,1);
+insert into persona_nivelDeEstudio values (3,1);
+insert into persona_nivelDeEstudio values (4,1);
+insert into persona_nivelDeEstudio values (5,1);
+insert into persona_nivelDeEstudio values (6,1);
+insert into persona_nivelDeEstudio values (7,1);
+insert into persona_nivelDeEstudio values (8,1);
+insert into persona_nivelDeEstudio values (9,1);
 
 insert into alumno values (1,1);
 insert into alumno values (2,2);
@@ -248,7 +275,7 @@ insert into docente_tipo values (2,2);
 insert into curso values (1,'Excel Basico',3,2500,25,25,1);
 insert into curso values (2,'Word Avanzado',1,2000,20,20,1);
 insert into curso values (3,'Maestria en Procesos',2,2000,25,25,2);
-insert into curso values (4,'Maestria en escabacion',3,3000,25,25,2);
+insert into curso values (4,'Maestria en excabacion',3,3000,25,25,2);
 
 insert into aula values (1,'Primer piso',25);
 insert into aula values (2,'Segundo piso',20);
@@ -268,10 +295,10 @@ insert into grupo values (3,'Noche',3,2,3,2,1);
 insert into grupo values (4,'Mañana',4,4,1,2,2);
 insert into grupo values (5,'Tarde',2,1,2,1,2);
 
-insert into notaDeventa values (1,'2018-01-26',2500,1,1,1,1);
-insert into notaDeventa values (2,'2018-01-26',2000,1,2,2,2);
-insert into notaDeventa values (3,'2018-01-26',2000,1,3,3,3);
-insert into notaDeventa values (4,'2018-01-26',3000,1,4,1,4);
+insert into inscripcion values (1,'2018-01-26',2500,1,1,1,1);
+insert into inscripcion values (2,'2018-01-22',2000,1,2,2,2);
+insert into inscripcion values (3,'2018-01-24',2000,1,3,3,3);
+insert into inscripcion values (4,'2018-01-26',3000,1,4,1,4);
 
 <<<<<<< HEAD
 delete from personalAdministrativo where codigo=1
@@ -309,22 +336,6 @@ delete from aula where nro=3;
 
 
 
-
-/*Ejemplo Jroge*/
-insert into persona values
-(1,111,'Alumno','Torrez','Aramayo',75364642,'jroge@gmail.com','2019-01-01',1,0,0);
-insert into persona values
-(2,222,'Docente','Torrez','Aramayo',75364642,'jroge@gmail.com','2019-01-01',0,1,0);
-insert into persona values
-(3,333,'Trabajador','Torrez','Aramayo',75364642,'jroge@gmail.com','2019-01-01',0,0,1);
-
-delete from cargo;
-select*from departamento;
-insert into departamento values(1,'Departamento de ventas',0);
-insert into departamento values(2,'Departamento de marketing',0);
-insert into cargo values(1,'Vendedor 1',0,1)
-insert into cargo values(2,'Nego 1',0,2)
-delete from cargo where id=1
 
 
 
