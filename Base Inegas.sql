@@ -64,7 +64,7 @@ create table departamento(
 create table cargo(
 	id int primary key,
 	nombre varchar(30) not null,
-	estado bit not null,
+	estado bit not null,	
 	idDepartamento int not null,
 	foreign key (idDepartamento) references departamento (id)
 	on update cascade
@@ -78,12 +78,12 @@ create table estadoCivil(
 
 create table personalAdministrativo(
 	codigo int primary key,
-	codigoPersona int not null,
-	idCargo int not null,
-    idEstadoCivil int,
+	codigoPersona int not null
     cantidadDeHijos int,
     direccionDomicilio varchar(50),
-    fechaDeIngreso date,
+    fechaDeIngreso date not null,
+	idCargo int not null,
+    idEstadoCivil int,
 	foreign key (codigoPersona) references persona (codigo),
 	foreign key (idCargo) references cargo (id),
 	foreign key (idEstadoCivil) references estadoCivil(id)
@@ -237,10 +237,10 @@ insert into alumno values (4,4);
 
 insert into usuario values ('Abigail','abigail123',10,1);
 insert into usuario values ('Sebastian','sebastian123',10,2);
-insert into usuario values ('Luisa','luisa123',10,4);
+insert into usuario values ('Luisa','luisa123',20,4);
 insert into usuario values ('Juan','juan123',10,6);
-insert into usuario values ('Norma','norma123',10,7);
-insert into usuario values ('Karen','karen123',10,8);
+insert into usuario values ('Norma','norma123',30,7);
+insert into usuario values ('Karen','karen123',20,8);
 insert into usuario values ('Simon','simon123',10,9);
 
 insert into departamento values (1,'Departamento de ventas',0);
@@ -258,9 +258,9 @@ insert into estadoCivil values(3,'Separado');
 insert into estadoCivil values(4,'Divorciado');
 insert into estadoCivil values(5,'Viudo');
 
-insert into personalAdministrativo values (1,7,2,1,0,'Radial 13, Quinto anillo',getdate());
-insert into personalAdministrativo values (2,8,4,2,3,'Radial 13, Quinto anillo',getdate());
-insert into personalAdministrativo values (3,9,3,5,2,'Radial 13, Quinto anillo',getdate());
+insert into personalAdministrativo values (1,7,2,'Radial 13, Quinto anillo','2013-03-11',0,2);
+insert into personalAdministrativo values (2,8,4,'Radial 13, Quinto anillo','2004-06-28',3,3);
+insert into personalAdministrativo values (3,9,3,'Radial 13, Quinto anillo','2010-01-23',2,4);
 
 insert into docente values (1,5,'UDABOL','Cuarto anillo, Av. Beni');
 insert into docente values (2,6,'TIGO','Quinto anillo, Doble via a la guardia');
@@ -289,16 +289,20 @@ insert into horario values (3,'20:00','22:00');
 insert into gestion values (1,'1-2018');
 insert into gestion values (2,'2-2018');
 
-insert into grupo values (1,'Mañana',1,1,1,1,1);
-insert into grupo values (2,'Tarde',2,3,2,1,2);
-insert into grupo values (3,'Noche',3,2,3,2,1);
-insert into grupo values (4,'Mañana',4,4,1,2,2);
-insert into grupo values (5,'Tarde',2,1,2,1,2);
+insert into dias values (1,'Lunes-Miercoles-Viernes');
+insert into dias values (2,'Martes-Jueves');
+insert into dias values (3,'Sabado');
 
-insert into inscripcion values (1,'2018-01-26',2500,1,1,1,1);
-insert into inscripcion values (2,'2018-01-22',2000,1,2,2,2);
-insert into inscripcion values (3,'2018-01-24',2000,1,3,3,3);
-insert into inscripcion values (4,'2018-01-26',3000,1,4,1,4);
+insert into grupo values (1,'Mañana',1,1,1,1,1,1);
+insert into grupo values (2,'Tarde',2,3,2,1,1,2);
+insert into grupo values (3,'Noche',3,2,3,3,2,1);
+insert into grupo values (4,'Mañana',4,4,1,3,2,2);
+insert into grupo values (5,'Tarde',2,1,2,2,1,2);
+
+insert into inscripcion values (1,'2018-01-26',2500,2500,70,1,1,1);
+insert into inscripcion values (2,'2018-01-22',2000,2000,88,1,2,2);
+insert into inscripcion values (3,'2018-01-24',2000,2000,63,1,3,3);
+insert into inscripcion values (4,'2018-01-26',3000,3000,92,1,4,4);
 
 <<<<<<< HEAD
 delete from personalAdministrativo where codigo=1
