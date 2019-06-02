@@ -15,6 +15,12 @@ Route::get('/','controlador@inicio');
 Route::get('nuevoRegistro','controlador@registro');
 Route::get('mostrarRegistros','controlador@registrados');
 Route::get('EJ{parametro?}','controlador@parametroEjemplo');
+Route::get('nuevaPersona','controlador@nuevaPersona');
+Route::get('inicio','controlador@inicio');
+Route::get('nuevoAlumno','controlador@nuevoAlumno');
+Route::get('nuevoTrabajador','controlador@nuevoTrabajador');
+Route::get('nuevoDocente','controlador@nuevoDocente');
+Route::get('registrado','controlador@registrado');
 /* Route::get('/EJ{parametro?}','controlador@parametroEjemplo')->where(
     'parametro',"[A-Za-z]+"
 ); */

@@ -86,11 +86,26 @@ class controlador extends Controller
     {
         //
     }
-    public function inicio(){
-        return view('inicio');
+    public function nuevaPersona(){
+        return view('nuevaPersona');
     }
     public function registro(){
         return view('registro');
+    }
+    public function nuevoAlumno(){
+        return view('nuevoAlumno');
+    }
+    public function inicio(){
+        return view('inicio');
+    }
+    public function nuevoTrabajador(){
+        return view('nuevoTrabajador');
+    }
+    public function nuevoDocente(){
+        return view('nuevoDocente');
+    }
+    public function registrado(){
+        return view('registrado');
     }
     public function registrados(){
         $nombre='Jroge';
@@ -105,12 +120,15 @@ class controlador extends Controller
     /* Se puede usar el request solo aqui*/
     public function registrar(Request $request){
         $this->validate($request,[
+            'CarnetDeIdentidad'=>'required',
             'Nombre(s)'=>'required',
-            'Apellidos'=>'required',
-            'Correo'=>'email|required',/* ['email','required'] */
+            'ApellidoPaterno'=>'required',
+            'ApellidoMaterno'=>'required',
             'Sexo'=>'required',
-            'contraseña'=>'required',
-            'confirmarContraseña'=>'required'
+            'Correo'=>'email|required',/* ['email','required'] */
+            'FechaDeNacimiento'=>'required',
+            'Nacionalidad'=>'required',
+            'DireccionDomicilio'=>'required'
         ]);
         return $request->all();
         // if($this->request->has('nombre')){
