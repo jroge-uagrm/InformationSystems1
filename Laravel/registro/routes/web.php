@@ -12,7 +12,12 @@
 */
 
 Route::get('/','controlador@inicio');
-Route::get('nuevoRegistro','controlador@registro');
+Route::get('cursos','controlador@cursos');
+Route::get('informacion','controlador@informacion');
+Route::get('iniciarSesion','controlador@iniciarSesion');
+Route::get('contactanos','controlador@contactanos');
+
+/*Route::get('nuevoRegistro','controlador@registro');
 Route::get('mostrarRegistros','controlador@registrados');
 Route::get('EJ{parametro?}','controlador@parametroEjemplo');
 Route::get('nuevaPersona','controlador@nuevaPersona');

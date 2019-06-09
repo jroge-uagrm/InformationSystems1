@@ -1,6 +1,41 @@
-.importante{
-    color:red;
-    background:black;
+.principal{
+    background:darkgrey;
+    margin:auto;
 }
-
-
+.centro{
+    width: 70%;
+    margin:auto;
+}
+.tabs{
+    font-size: 120%;
+    background: black;
+    margin: 0;
+    padding: 1% 0;
+    display: flex;
+}
+.tabs li{
+    margin:auto;
+    list-style:none;
+    /*border-style:solid;
+    border-color:white;*/
+}
+.tabs li a{
+    color: gray;
+    text-decoration: none;
+    text-align: center;
+}
+.parrafo{
+    margin: 0;
+    background: rgb(250, 35, 35);
+}
+header{
+    margin:auto;
+    font-size: 500%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: darkblue;
+    text-align: center;
+}
+.transparente{
+    color:transparent;
+    background: transparent;
+}

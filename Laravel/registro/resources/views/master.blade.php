@@ -4,19 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="/public/css/estilos.css" >
-    <style>.error{color:red;font-size:10px;}</style>
-    <title>Seccion-@yield('titulo')</title>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css">
 </head>
-<body>
-    <p class="importante">{{request()->url()}}</p>
-    <p>{{ request()->is('/') ? 'Estas en Inicio':''}} </p>
-    <h1>Seccion-@yield('cabeza')</h1>
-    @section('contenido')
-    @show
-    <br>
-    <br>
-    @section('pie')
+<body class="principal">
+    <header>INEGAS</header>
+    @section('body')
     @show
 </body>
 </html>
