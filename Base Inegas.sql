@@ -44,6 +44,7 @@ create table persona_nivelDeEstudio(
 create table alumno(
 	codigo int primary key,
 	codigoPersona int not null,
+	universidad varchar(50) not null,
     foreign key(codigoPersona)references persona(codigo)
 );
 
@@ -230,10 +231,10 @@ insert into persona_nivelDeEstudio values (7,1);
 insert into persona_nivelDeEstudio values (8,1);
 insert into persona_nivelDeEstudio values (9,1);
 
-insert into alumno values (1,1);
-insert into alumno values (2,2);
-insert into alumno values (3,3);
-insert into alumno values (4,4);
+insert into alumno values (1,'UAGRM',1);
+insert into alumno values (2,'UDABOL',2);
+insert into alumno values (3,'UAGRM',3);
+insert into alumno values (4,'UAGRM',4);
 
 insert into usuario values ('Abigail','abigail123',10,1);
 insert into usuario values ('Sebastian','sebastian123',10,2);
