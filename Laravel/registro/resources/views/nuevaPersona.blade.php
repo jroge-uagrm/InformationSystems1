@@ -4,12 +4,12 @@
 @section('contenido')
     <h2>Registro</h2>
     <form method="POST" action="registro">
-    <label for ="Carnet de Identidad">
+        <label for ="Carnet de Identidad">
             CI:
             <input type="text" name="CI" value="{{old('CarnetDeIdentidad')}}">
             {!!$errors->first('CarnetDeIdentidad','<span class=error>:message</span>')!!}
         </label><br><br>
-        <label for ="Nombre(s)">
+        <label for="Nombre(s)">
             Nombre(s):
             <input type="text" name="Nombre(s)" value="{{old('Nombre(s)')}}">
             {!!$errors->first('Nombre(s)','<span class=error>:message</span>')!!}
