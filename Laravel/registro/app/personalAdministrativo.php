@@ -6,5 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class personalAdministrativo extends Model
 {
-    //
+    protected $table = 'personalAdministrativo';
+
+    protected $fillable = [
+        'codigoPersona','cantidadDeHijos','direccionDomicilio','fechaDeIngreso',
+        'idCargo','idEstadoCivil'
+    ];
+
+    public function persona()
+    {
+        //
+    }
+
+    public function cargo()
+    {
+        return $this->belongsTo('App\cargo','idCargo');
+    }
+
+    public function estadoCivil()
+    {
+        return $this->belongsTo('App\estadoCivil','idEstadoCivil');
+    }
+
+    public function inscripcion()
+    {
+        return $this->hasMany('App\inscripcion','codigoPersonalAdministrativo');
+    }
 }
