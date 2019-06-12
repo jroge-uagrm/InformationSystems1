@@ -5,9 +5,14 @@ Route::get('cursos','controlador@cursos');
 Route::get('informacion','controlador@informacion');
 Route::get('iniciarSesion','controlador@iniciarSesion');
 Route::get('contactanos','controlador@contactanos');
-Route::get('usuario','controlador@usuario');
+Route::get('cursosDisponibles','controlador@cursosDisponibles');
+Route::get('cursosTomados','controlador@cursosTomados');
+Route::get('miHorario','controlador@miHorario');
+Route::get('pagos','controlador@pagos');
+
 //Para el formulario de iniciar sesion
 Route::post('usuario','controlador@verificarInicioDeSesion');
+
 
 /*Route::get('nuevoRegistro','controlador@registro');
 Route::get('mostrarRegistros','controlador@registrados');

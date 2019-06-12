@@ -68,8 +68,36 @@ header{
     background-color: gray;
     color:darkblue;
 }
-
-
+.costado{
+    width: 90%;
+    margin:5% 5%;
+    display: flex;
+}
+.costado .disponibles{
+    font-size: 120%;
+    margin: 0%;
+    width: 20%;
+    background: black;
+    padding: 0%;
+}
+.costado .disponibles a{
+    float: left;
+    width: 100%;
+    margin: 0%;
+    padding: 5% 0%;
+    color: gray;
+    text-align: center;
+}
+.costado .disponibles a:hover{
+    background: rgb(250, 35, 35);
+    color:darkblue;
+}
+.costado .mostrar{
+    width: 80%;
+    height: 100%;
+    padding: 0% 0% 40% 0%;
+    background: rgb(250, 35, 35);
+}
 
 
 

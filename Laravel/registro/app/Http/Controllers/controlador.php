@@ -13,40 +13,42 @@ class controlador extends Controller
     public function edit($id){}
     public function update(Request $request, $id){}
     public function destroy($id){}
-    //Personal
+    //---------------------Personal------------------------
+    
+    //VISTAS
     public function inicio(){return view('inicio');}
-    public function cursos(){return view('cursos');}
     public function informacion(){return view('informacion');}
     public function iniciarSesion(){return view('iniciarSesion');}    
     public function contactanos(){return view('contactanos');}
+    public function cursosDisponibles(){return view('cursosDisponibles');}
+    public function cursosTomados(){return view('cursosTomados');}
+
+    //VISTAS CON PARAMETROS
+    public function cursos(){
+        //$listaDeCursos=$this->listaDeCursos();
+        $listaDeCursos=([
+            "Curso 1",
+            "Curso 2",
+        ]);
+        return view('cursos',compact('listaDeCursos'));
+    }
+
+    //CONSULTAS
+    private function listaDeCursos(){
+        return DB::table('curso')->get();
+    }
+
+    //VERIFICACIONES
     public function verificarInicioDeSesion(Request $request){
         $this->validate($request,[
             'nombreUsuario'=>'required|max:30',
-            'contraseñaUsuario'=>'required|max:30',
+            'contrasenhaUsuario'=>'required|max:30',
         ]);
-        //$request->all();
-        return view('usuario');
+        //return $request->all();
+        return view('usuario',$request->all());
     }
-    public function usuario(){return view('usuario');}
-    //*******************************************************
-    /* Se puede usar el request solo aqui*/
-    public function registrar(Request $request){
-        $this->validate($request,[
-            'CarnetDeIdentidad' =>'required',
-            'Nombre(s)'         =>'required',
-            'ApellidoPaterno'   =>'required',
-            'ApellidoMaterno'   =>'required',
-            'Sexo'              =>'required',
-            'Correo'            =>'email|required',/* ['email','required'] */
-            'FechaDeNacimiento' =>'required',
-            'Nacionalidad'      =>'required',
-            'DireccionDomicilio'=>'required'
-        ]);
-        return $request->all();
-        // if($this->request->has('nombre')){
-        //     return $this->request->nombre;
-        // }
-    }
+    
+    //-----------------------OTROS------------------------
     public function registrados(){
         $nombre='Jroge';
         $apellidos='Torrez';
