@@ -1,4 +1,32 @@
 @extends('inicio')
 @section('parrafo')
-    Iniciar Sesion
+<br>
+    <form method="POST" action="usuario">
+        <label for="nombreUsuario">
+            Usuario:
+            <br>
+            <input type="text"name="nombreUsuario" value="{{old('nombreUsuario')}}">
+            {!!$errors->first('nombreUsuario','<span class="error">:message</span>')!!}
+        </label>
+        <br><br>
+        <label for="contrasenhaUsuario">
+            Contraseña:
+            <br>
+            <input type="password"name="contrasenhaUsuario">
+            {!!$errors->first('contrasenhaUsuario','<span class="error">:message</span>')!!}
+        </label>
+        <br><br>
+        <label for ="tipoPersona">
+            <input type="radio"name="tipoPersona"value="A"checked>
+            Alumno
+            <br>
+            <input type="radio"name="tipoPersona" value="D"> 
+            Docente
+            <br>
+            <input type="radio"name="tipoPersona" value="T">
+            Trabajador
+            <!-- {!!$errors->first('tipoPersona','<span class=error>:message</span>')!!} -->
+        <br><br><br>
+        <button class="boton"type="submit" value="Iniciar Sesion">Iniciar Sesion</button>
+    </form>
 @endsection

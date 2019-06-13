@@ -79,7 +79,7 @@ create table estadoCivil(
 
 create table personalAdministrativo(
 	codigo int primary key,
-	codigoPersona int not null
+	codigoPersona int not null,
     cantidadDeHijos int,
     direccionDomicilio varchar(50),
     fechaDeIngreso date not null,
@@ -305,20 +305,13 @@ insert into inscripcion values (2,'2018-01-22',2000,2000,88,1,2,2);
 insert into inscripcion values (3,'2018-01-24',2000,2000,63,1,3,3);
 insert into inscripcion values (4,'2018-01-26',3000,3000,92,1,4,4);
 
-<<<<<<< HEAD
 delete from personalAdministrativo where codigo=1
 select * from grupo
-=======
-delete from personalAdministrativo where codigo=1;
->>>>>>> bc66da6d38343fbc3b66d0f483198a13ff8761b3
-
 select * from personalAdministrativo;
 
 update persona set nombre='Carmen' where ci=888;
 
 update usuario set nombre='Carmen' where codigoPersona=8;
-
-update docente set profesion='Ingeniero Industrial' where codigoPersona=5;
 
 update horario set horaInicio='15:00' where id=1;
 

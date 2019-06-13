@@ -13,36 +13,42 @@ class controlador extends Controller
     public function edit($id){}
     public function update(Request $request, $id){}
     public function destroy($id){}
-    //Personal
-    public function logIn(){
-        return view('logIn');
-    }
-    public function cursos(){return view('cursos');}
+    //---------------------Personal------------------------
+    
+    //VISTAS
+    public function inicio(){return view('inicio');}
     public function informacion(){return view('informacion');}
     public function iniciarSesion(){return view('iniciarSesion');}    
     public function contactanos(){return view('contactanos');}
+    public function cursosDisponibles(){return view('cursosDisponibles');}
+    public function cursosTomados(){return view('cursosTomados');}
+
+    //VISTAS CON PARAMETROS
+    public function cursos(){
+        //$listaDeCursos=$this->listaDeCursos();
+        $listaDeCursos=([
+            "Curso 1",
+            "Curso 2",
+        ]);
+        return view('cursos',compact('listaDeCursos'));
+    }
+
+    //CONSULTAS
+    private function listaDeCursos(){
+        return DB::table('curso')->get();
+    }
+
+    //VERIFICACIONES
+    public function verificarInicioDeSesion(Request $request){
+        $this->validate($request,[
+            'nombreUsuario'=>'required|max:30',
+            'contrasenhaUsuario'=>'required|max:30',
+        ]);
+        //return $request->all();
+        return view('usuario',$request->all());
+    }
     
-    public function nuevaPersona(){
-        return view('nuevaPersona');
-    }
-    public function registro(){
-        return view('registro');
-    }
-    public function nuevoAlumno(){
-        return view('nuevoAlumno');
-    }
-    public function inicio(){
-        return view('inicio');
-    }
-    public function nuevoTrabajador(){
-        return view('nuevoTrabajador');
-    }
-    public function nuevoDocente(){
-        return view('nuevoDocente');
-    }
-    public function registrado(){
-        return view('registrado');
-    }
+    //-----------------------OTROS------------------------
     public function registrados(){
         $nombre='Jroge';
         $apellidos='Torrez';
@@ -52,24 +58,6 @@ class controlador extends Controller
             'apellidosVista'=>$apellidos,
             'correoVista'=>$correo
         ]);
-    }
-    /* Se puede usar el request solo aqui*/
-    public function registrar(Request $request){
-        $this->validate($request,[
-            'CarnetDeIdentidad'=>'required',
-            'Nombre(s)'=>'required',
-            'ApellidoPaterno'=>'required',
-            'ApellidoMaterno'=>'required',
-            'Sexo'=>'required',
-            'Correo'=>'email|required',/* ['email','required'] */
-            'FechaDeNacimiento'=>'required',
-            'Nacionalidad'=>'required',
-            'DireccionDomicilio'=>'required'
-        ]);
-        return $request->all();
-        // if($this->request->has('nombre')){
-        //     return $this->request->nombre;
-        // }
     }
     public function parametroEjemplo($p){
         return view('ejemplo',compact('p'));

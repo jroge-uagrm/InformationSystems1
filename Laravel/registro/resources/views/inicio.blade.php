@@ -2,14 +2,14 @@
 @section('body')
     <div class="centro">
         <ul class="tabs">
-            <li><a href="cursos"><span>Cursos
-            </span></a></li>
-            <li><a href="informacion"><span>Informacion
-            </span></a></li>
-            <li><a href="contactanos"><span>Contáctanos
-            </span></a></li>
-            <li><a href="iniciarSesion"><span>Iniciar Sesion
-            </span></a></li>
+            <a href="cursos"><span>Cursos
+            </span></a>
+            <a href="informacion"><span>Informacion
+            </span></a>
+            <a href="contactanos"><span>Contáctanos
+            </span></a>
+            <a href="iniciarSesion"><span>Iniciar Sesion
+            </span></a>
         </ul>
         <div class="parrafo">
             <br>

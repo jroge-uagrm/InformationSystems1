@@ -1,21 +1,18 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/','controlador@inicio');
 Route::get('cursos','controlador@cursos');
 Route::get('informacion','controlador@informacion');
 Route::get('iniciarSesion','controlador@iniciarSesion');
 Route::get('contactanos','controlador@contactanos');
+Route::get('cursosDisponibles','controlador@cursosDisponibles');
+Route::get('cursosTomados','controlador@cursosTomados');
+Route::get('miHorario','controlador@miHorario');
+Route::get('pagos','controlador@pagos');
+
+//Para el formulario de iniciar sesion
+Route::post('usuario','controlador@verificarInicioDeSesion');
+
 
 /*Route::get('nuevoRegistro','controlador@registro');
 Route::get('mostrarRegistros','controlador@registrados');
