@@ -19,6 +19,6 @@ class cuota extends Model
 
     public function pagoDeCuota()
     {
-        return $this->hasMany('App\pagoDeCuota','nroInscripcion','nroCuota');
+        return $this->hasMany('App\pagoDeCuota',array('nroInscripcion','nroCuota'));
     }
 }

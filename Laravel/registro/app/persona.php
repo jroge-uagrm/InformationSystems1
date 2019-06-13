@@ -27,4 +27,19 @@ class persona extends Model
     {
         return $this->belongsToMany('App\nivelDeEstudio')->using('App\persona_nivelDeEstudio');
     }
+
+    public function alumno()
+    {
+        return $this->belongsTo('App\alumno','codigoPersona');
+    }
+
+    public function docente()
+    {
+        return $this->belongsTo('App\docente','codigoPersona');
+    }
+
+    public function personalAdministrativo()
+    {
+        return $this->belongsTo('App\personalAdministrativo','codigoPersona');
+    }
 }

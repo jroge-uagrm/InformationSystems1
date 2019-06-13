@@ -14,7 +14,7 @@ class alumno extends Model
 
     public function persona()
     {
-        //
+        return $this->hasOne('App\persona','codigoPersona');
     }
 
     public function inscripcion()

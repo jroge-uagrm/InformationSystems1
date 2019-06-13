@@ -14,6 +14,6 @@ class pagoDeCuota extends Model
 
     public function cuota()
     {
-        return $this->belongsTo('App\cuota','nroInscripcion','nroCuota');
+        return $this->belongsTo('App\cuota',array('nroInscripcion','nroCuota'));
     }
 }
