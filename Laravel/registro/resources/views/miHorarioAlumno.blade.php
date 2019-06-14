@@ -1,4 +1,4 @@
 @extends('usuarioAlumno')
 @section('mostrar')
-    Cursos Disponibles
+    Mi Horario
 @endsection

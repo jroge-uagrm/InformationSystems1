@@ -13,15 +13,28 @@ class controlador extends Controller
     public function edit($id){}
     public function update(Request $request, $id){}
     public function destroy($id){}
+        
     //---------------------Personal------------------------
-    
+
     //VISTAS
     public function inicio(){return view('inicio');}
     public function informacion(){return view('informacion');}
     public function iniciarSesion(){return view('iniciarSesion');}    
     public function contactanos(){return view('contactanos');}
+
     public function cursosDisponibles(){return view('cursosDisponibles');}
     public function cursosTomados(){return view('cursosTomados');}
+    public function miHorarioAlumno(){return view('miHorarioAlumno');}
+    public function pagos(){return view('pagos');}
+    public function cerrarSesionAlumno(){return view('cerrarSesionAlumno');}
+    
+    public function misCursos(){return view('misCursos');}
+    public function listasDeAlumnos(){return view('listasDeAlumnos');}
+    public function miHorarioDocente(){return view('miHorarioDocente');}
+    public function otros(){return view('otros');}
+    public function cerrarSesionDocente(){return view('cerrarSesionDocente');}
+    
+    public function cerrarSesionTrabajador(){return view('cerrarSesionTrabajador');}
 
     //VISTAS CON PARAMETROS
     public function cursos(){
@@ -45,7 +58,13 @@ class controlador extends Controller
             'contrasenhaUsuario'=>'required|max:30',
         ]);
         //return $request->all();
-        return view('usuario',$request->all());
+        if($request->tipoPersona=='A'){
+            return view('usuarioAlumno',$request->all());
+        }elseif ($request->tipoPersona=='D'){
+            return view('usuarioDocente');
+        }else{
+            return view('usuarioTrabajador');
+        }
     }
     
     //-----------------------OTROS------------------------

@@ -6,14 +6,14 @@
     {s{$tipoPersona}}-->
         <div class="costado">
             <ul class="disponiblesAlumno">
-            <a href="cursosDisponibles"><span>
+                <a href="cursosDisponibles"><span>
                 Inscribir Alumno</span></a>
                 <a href="cursosTomados"><span>
                 Cursos</span></a>
                 <a href="miHorario"><span>
                 Pagos</span></a>
-                <a href="pagos"><span>
-                Pagos</span></a>
+                <a href="cerrarSesion"><span>
+                Cerrar Sesion</span></a>
             </ul>
             <div class="mostrar">
                 @section('mostrar')

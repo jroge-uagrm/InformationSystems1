@@ -1,4 +1,4 @@
-.principal{
+ .principal{
     background:darkgrey;
     margin:auto;
 }
@@ -22,8 +22,6 @@
     list-style:none;
     text-align: center;
     color: gray;
-    /*border-style:solid;
-    border-color:white;*/
 }
 .centro .tabs a:hover{
     background: rgb(250, 35, 35);
@@ -72,6 +70,7 @@ header{
     width: 90%;
     margin:5% 5%;
     display: flex;
+    padding: 0%;
 }
 .costado .disponibles{
     font-size: 120%;
@@ -93,11 +92,25 @@ header{
     color:darkblue;
 }
 .costado .mostrar{
-    width: 80%;
+    width: 75%;
     height: 100%;
-    padding: 0% 0% 40% 0%;
+    padding: 5% 0% 0% 5%;
     background: rgb(250, 35, 35);
 }
-
-
-
+.costado .mostrar button{
+    background-color: darkblue;
+    font-size: 200%;
+    border-color: darkblue;
+    color: gray;
+    padding: 0%;
+}
+.costado .mostrar a{
+    color: gray;
+    font-style: none;
+}
+.costado .mostrar a:hover{
+    color:darkblue;
+}
+.costado .mostrar button:hover{
+    background-color: gray;
+}
