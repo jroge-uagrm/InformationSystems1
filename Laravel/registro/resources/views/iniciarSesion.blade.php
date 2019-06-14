@@ -2,7 +2,7 @@
 @section('parrafo')
 <br>
     <form method="POST" action="usuario">
-        <label for="nombreUsuario">
+        <label for="nombreUsuario"> 
             Usuario:
             <br>
             <input type="text"name="nombreUsuario" value="{{old('nombreUsuario')}}">
@@ -25,7 +25,7 @@
             <br>
             <input type="radio"name="tipoPersona" value="T">
             Trabajador
-            <!-- {!!$errors->first('tipoPersona','<span class=error>:message</span>')!!} -->
+            <!-- {s!s!s$errors->first('tipoPersona','<span class=error>:message</span>')!!} -->
         <br><br><br>
         <button class="boton"type="submit" value="Iniciar Sesion">Iniciar Sesion</button>
     </form>

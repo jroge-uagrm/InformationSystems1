@@ -5,9 +5,9 @@
     {s{$contrasenhaUsuario}}
     {s{$tipoPersona}}-->
         <div class="costado">
-            <ul class="disponiblesAlumno">
-                <a href="cursosDisponibles"><span>
-                Inscribir Alumno</span></a>
+            <ul class="disponibles">
+                <a href="registrarPersona"><span>
+                Registrar Persona</span></a>
                 <a href="cursosTomados"><span>
                 Cursos</span></a>
                 <a href="miHorario"><span>
