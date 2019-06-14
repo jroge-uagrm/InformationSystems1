@@ -13,4 +13,9 @@ class profesion extends Model
     protected $fillable = [
         'nombre'
     ];
+
+    public function persona()
+    {
+        return $this->belongsToMany('App\persona')->using('App\persona_profesion');
+    }
 }

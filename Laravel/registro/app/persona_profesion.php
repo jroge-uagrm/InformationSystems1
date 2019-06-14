@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Pivot;
 
-class persona_profesion extends Model
+class persona_profesion extends Pivot
 {
-    //
+    public $incrementing = true;
 }

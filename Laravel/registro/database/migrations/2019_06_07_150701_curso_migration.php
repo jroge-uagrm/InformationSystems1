@@ -19,7 +19,6 @@ class CursoMigration extends Migration
             $table->float('duracion');
             $table->float('costo');
             $table->integer('cupoTotal');
-            $table->integer('cupoDisponible');
             $table->integer('idTipo')->unsigned();
             $table->foreign('idTipo')->references('id')->on('tipo');
             $table->timestamps();
