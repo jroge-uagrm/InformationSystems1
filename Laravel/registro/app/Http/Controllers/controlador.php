@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class controlador extends Controller
 {
@@ -50,6 +51,9 @@ class controlador extends Controller
     private function listaDeCursos(){
         return DB::table('curso')->get();
     }
+    public function registrarPersona(){
+        return view('registrarPersona');
+    }
 
     //VERIFICACIONES
     public function verificarInicioDeSesion(Request $request){
@@ -59,12 +63,37 @@ class controlador extends Controller
         ]);
         //return $request->all();
         if($request->tipoPersona=='A'){
-            return view('usuarioAlumno',$request->all());
+            return view('usuarioAlumno');
         }elseif ($request->tipoPersona=='D'){
             return view('usuarioDocente');
         }else{
             return view('usuarioTrabajador');
         }
+    }
+    public function registrar(Request $request){
+        $this->validate($request,[
+            'CI'=>'required|max:30',
+            'Nombre(s)'=>'required|max:30',
+            'ApellidoPaterno'=>'required|max:30',
+            'ApellidoMaterno'=>'required|max:30',
+            'Telefono'=>'required|max:30',
+            'Correo'=>'required|max:30',
+            'FechaDeNacimiento'=>'required|max:30',
+            'Nacionalidad'=>'required|max:30',
+        ]);
+        DB::table('persona')->insert([
+            "ci"=>$request->input('CI'),
+            "nombre"=>$request->input('Nombre(s)'),
+            "apellidoPaterno"=>$request->input('ApellidoPaterno'),
+            "apellidoMaterno"=>$request->input('ApellidoMaterno'),
+            "telefono"=>$request->input('Telefono'),
+            "correo"=>$request->input('Correo'),
+            "fechaNacimiento"=>$request->input('FechaDeNacimiento'),
+            "tipoAlumno"=>1,//$request->input('TipoAlumno'),
+            "tipoDocente"=>0,//$request->input('TipoDocente'),
+            "tipoTrabajador"=>0//$request->input('TipoTrabajador'),
+        ]);
+        return $request->all();
     }
     
     //-----------------------OTROS------------------------
