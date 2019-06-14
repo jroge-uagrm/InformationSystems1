@@ -1,14 +1,24 @@
 <?php
-
 Route::get('/','controlador@inicio');
 Route::get('cursos','controlador@cursos');
 Route::get('informacion','controlador@informacion');
 Route::get('iniciarSesion','controlador@iniciarSesion');
 Route::get('contactanos','controlador@contactanos');
+
 Route::get('cursosDisponibles','controlador@cursosDisponibles');
 Route::get('cursosTomados','controlador@cursosTomados');
-Route::get('miHorario','controlador@miHorario');
+Route::get('miHorarioAlumno','controlador@miHorarioAlumno');
 Route::get('pagos','controlador@pagos');
+Route::get('cerrarSesionAlumno','controlador@cerrarSesionAlumno');
+
+Route::get('misCursos','controlador@misCursos');
+Route::get('listasDeAlumnos','controlador@listasDeAlumnos');
+Route::get('miHorarioDocente','controlador@miHorarioDocente');
+Route::get('otros','controlador@otros');
+Route::get('cerrarSesionDocente','controlador@cerrarSesionDocente');
+
+
+Route::get('cerrarSesionTrabajador','controlador@cerrarSesionTrabajador');
 
 //Para el formulario de iniciar sesion
 Route::post('usuario','controlador@verificarInicioDeSesion');

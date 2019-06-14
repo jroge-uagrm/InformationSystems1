@@ -10,12 +10,15 @@
                 Cursos Disponibles</span></a>
                 <a href="cursosTomados"><span>
                 Cursos Tomados</span></a>
-                <a href="miHorario"><span>
+                <a href="miHorarioAlumno"><span>
                 Mi Horario</span></a>
                 <a href="pagos"><span>
                 Pagos</span></a>
+                <a href="cerrarSesionAlumno"><span>
+                Cerrar Sesion</span></a>
             </ul>
             <div class="mostrar">
+                <!-- <label for="mostrarNombre">{s{$nombreUsuario}}</label> -->
                 @section('mostrar')
                 @show
             </div>
