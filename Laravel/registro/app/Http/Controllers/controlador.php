@@ -32,8 +32,8 @@ class controlador extends Controller
     public function listasDeAlumnos(){return view('listasDeAlumnos');}
     public function miHorarioDocente(){return view('miHorarioDocente');}
     public function otros(){return view('otros');}
-
     public function cerrarSesionDocente(){return view('cerrarSesionDocente');}
+    
     public function cerrarSesionTrabajador(){return view('cerrarSesionTrabajador');}
 
     //VISTAS CON PARAMETROS
