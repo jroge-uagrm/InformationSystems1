@@ -147,6 +147,9 @@ create table dias(
 create table grupo(
 	id int primary key,
 	nombre varchar(30) not null,
+	fechaInicio date not null,
+	fechaFin date not null,
+	cupoDisponible int not null,
 	nroAula int not null,
 	codigoCurso int not null,
 	idHorario int not null,
