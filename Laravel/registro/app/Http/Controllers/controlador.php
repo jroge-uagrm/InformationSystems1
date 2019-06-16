@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class controlador extends Controller
 {
@@ -71,13 +72,13 @@ class controlador extends Controller
         }
     }
     public function registrar(Request $request){
+        //Para reiniciar primary key de persona
+        //DBCC CHECKIDENT (persona, RESEED,0);
         $this->validate($request,[
             'CI'=>'required|max:30',
             'Nombre(s)'=>'required|max:30',
             'ApellidoPaterno'=>'required|max:30',
             'ApellidoMaterno'=>'required|max:30',
-            'Telefono'=>'required|max:30',
-            'Correo'=>'required|max:30',
             'FechaDeNacimiento'=>'required|max:30',
             'Nacionalidad'=>'required|max:30',
         ]);
@@ -91,9 +92,11 @@ class controlador extends Controller
             "fechaNacimiento"=>$request->input('FechaDeNacimiento'),
             "tipoAlumno"=>1,//$request->input('TipoAlumno'),
             "tipoDocente"=>0,//$request->input('TipoDocente'),
-            "tipoTrabajador"=>0//$request->input('TipoTrabajador'),
+            "tipoTrabajador"=>0,//$request->input('TipoTrabajador'),
+            "created_at"=>Carbon::now()
         ]);
-        return $request->all();
+        //return $request->all();
+        return DB::table('persona')->get();
     }
     
     //-----------------------OTROS------------------------

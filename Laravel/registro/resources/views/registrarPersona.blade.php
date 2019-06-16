@@ -46,7 +46,7 @@
             <input type="text"name="Nacionalidad"value="{{old('Nacionalidad')}}">
             {!!$errors->first('Nacionalidad','<span class=error>:message</span>')!!}
         </label><br><br>
-        <input type="submit" name="Registrar" value="RegistrarPersona">
+        <input type="submit" name="alar" value="RegistrarPersona">
         <!-- <input type="reset" name="Borrar" value="BorrarEspacios"> -->
     </form>
 @endsection
