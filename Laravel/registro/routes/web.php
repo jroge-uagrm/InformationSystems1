@@ -25,7 +25,7 @@ Route::get('cerrarSesionTrabajador','controlador@cerrarSesionTrabajador');
 
 //VERIFCACIONES
 Route::post('usuario','controlador@verificarInicioDeSesion');
-Route::post('registro');
+Route::post('registro','controlador@verificarRegistroDePersona');
 
 
 /*Route::get('nuevoRegistro','controlador@registro');
