@@ -6,12 +6,16 @@
     {s{$tipoPersona}}-->
         <div class="costado">
             <ul class="disponibles">
-                <a href="registrarPersona"><span>
-                Registrar Persona</span></a>
-                <a href="cursosTomados"><span>
+                <a href="personas"><span>
+                Personas</span></a>
+                <a href="alumnos"><span>
+                Alumnos</span></a>
+                <a href="cursos"><span>
                 Cursos</span></a>
-                <a href="miHorario"><span>
+                <a href="pagos"><span>
                 Pagos</span></a>
+                <a href="usuarios"><span>
+                Usuarios</span></a>
                 <a href="cerrarSesion"><span>
                 Cerrar Sesion</span></a>
             </ul>
