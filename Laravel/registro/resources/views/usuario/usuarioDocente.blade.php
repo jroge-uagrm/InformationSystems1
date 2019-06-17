@@ -12,8 +12,6 @@
                 Listas de Alumnos</span></a>
                 <a href="miHorarioDocente"><span>
                 Mi Horario</span></a>
-                <a href="otros"><span>
-                Otros</span></a>
                 <a href="cerrarSesionDocente"><span>
                 Cerrar Sesion</span></a>
             </ul>

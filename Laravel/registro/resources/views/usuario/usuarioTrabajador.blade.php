@@ -1,22 +1,18 @@
 @extends('master')
 @section('body')
-<!-- Aqui llegan estos parametros:  
-    {s{$nombreUsuario}}
-    {s{$contrasenhaUsuario}}
-    {s{$tipoPersona}}-->
         <div class="costado">
             <ul class="disponibles">
-                <a href="personas"><span>
+                <a href="usuarioTrabajador-personas"><span>
                 Personas</span></a>
-                <a href="alumnos"><span>
+                <a href="usuarioTrabajador-alumnos"><span>
                 Alumnos</span></a>
-                <a href="cursos"><span>
+                <a href="usuarioTrabajador-cursos"><span>
                 Cursos</span></a>
-                <a href="pagos"><span>
+                <a href="usuarioTrabajador-pagos"><span>
                 Pagos</span></a>
-                <a href="usuarios"><span>
+                <a href="usuarioTrabajador-usuarios"><span>
                 Usuarios</span></a>
-                <a href="cerrarSesion"><span>
+                <a href="usuarioTrabajador-cerrarSesion"><span>
                 Cerrar Sesion</span></a>
             </ul>
             <div class="mostrar">

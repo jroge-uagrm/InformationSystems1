@@ -29,6 +29,15 @@
             Trabajador
             <!-- {s!s!s$errors->first('tipoPersona','<span class=error>:message</span>')!!} -->
         <br><br><br>
-        <button class="boton"type="submit" value="Iniciar Sesion">Iniciar Sesion</button>
+        <!-- <button class="boton"type="submit" value="Iniciar Sesion">Iniciar Sesion</button> -->        
+        <button class="boton">Iniciar Sesion</button>
     </form>
 @endsection
+
+
+
+
+
+
+
+

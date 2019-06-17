@@ -1,4 +1,4 @@
-@extends('usuarioAlumno')
+@extends('usuarioTrabajador')
 @section('mostrar')
     Pagos
 @endsection

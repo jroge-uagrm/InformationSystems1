@@ -3,7 +3,7 @@
 //DBCC CHECKIDENT (persona, RESEED,0);
 
 Route::get('/','controlador@inicio');
-Route::get('cursos','controladorCursos@cursos');
+Route::get('cursos','controlador@cursos');
 Route::get('informacion','controlador@informacion');
 Route::get('iniciarSesion','controlador@iniciarSesion');
 Route::get('contactanos','controlador@contactanos');
@@ -21,13 +21,18 @@ Route::get('listasDeAlumnos','controladorAlumnos@listasDeAlumnos');
 Route::get('miHorarioDocente','controladorHorarios@miHorarioDocente');
 Route::get('cerrarSesionDocente','controladorDocentes@cerrarSesionDocente');
 
-//SECCION DE TRABAJADOR
-Route::get('registrarPersona','controladorPersonalAdministrativo@registrarPersona');
-Route::get('cerrarSesionTrabajador','controladorPersonalAdministrativo@cerrarSesionTrabajador');
-Route::get('usuarios','controladorUsuarios@usuarios');
+Route::get('usuarioTrabajador-personas','controladorPersonalAdministrativo@personas');
+Route::get('usuarioTrabajador-registrarPersona','controladorPersonalAdministrativo@registrarPersona');
+Route::get('usuarioTrabajador-cerrarSesion','controladorPersonalAdministrativo@cerrarSesion');
+Route::get('usuarioTrabajador-usuarios','controladorPersonalAdministrativo@usuarios');
+Route::get('usuarioTrabajador-usuarios-crear','controladorPersonalAdministrativo@crearUsuario');
+Route::get('usuarioTrabajador-crearUsuario','controladorPersonalAdministrativo@crearUsuario');
+Route::get('usuarioTrabajador-pagos','controladorPagos@pagos');
 
 //VERIFICACIONES
 Route::post('usuario','controlador@verificarInicioDeSesion');
+Route::post('nuevoUsuario','controladorPersonalAdministrativo@verificarCreacionUsuario');
+
 Route::post('registro','controlador@verificarRegistroDePersona');
 
 
@@ -45,7 +50,3 @@ Route::get('registrado','controlador@registrado');
 ); */
 
 // Route::get('a{parametro}',['as'=>'ejemplo',function($p){return $p;}]);
-Route::post('registro','controlador@registrar');
-//Automatico
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');

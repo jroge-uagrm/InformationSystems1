@@ -8,10 +8,11 @@ use Carbon\Carbon;
 
 class controladorCursos extends Controller
 {
-    public function cursos(){
-        //$listaDeCursos=$this->listaDeCursos();
-        $listaDeCursos=DB::table('curso')->get();
-        return view('cursos',compact('listaDeCursos'));
+    public static function cursos(){
+        return $cursos=DB::table('curso')
+                ->join('tipo', 'curso.idTipo', '=', 'tipo.id')
+                ->select('curso.*', 'tipo.nombre as nombreTipo')
+                ->get();
     }
     public function listaDeCursos(){
         return DB::table('curso')->get();

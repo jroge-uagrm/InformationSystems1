@@ -9,7 +9,8 @@ use Carbon\Carbon;
 class controladorAlumnos extends Controller
 {
     public function cerrarSesionAlumno(){
-        return view('cerrarSesionAlumno');
+        $tipo="Alumno";
+        return view('cerrarSesion',compact('tipo'));
     }
     //DOCENTE
     public function listasDeAlumnos(){

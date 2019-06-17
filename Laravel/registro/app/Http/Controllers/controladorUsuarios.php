@@ -8,14 +8,37 @@ use Carbon\Carbon;
 
 class controladorUsuarios extends Controller
 {
-    public function usuarios(){
-        return view('usuarios');
+    public static function usuarios(){
+        return $usuarios=DB::table('usuario')
+                ->join('persona', 'usuario.codigoPersona', '=', 'persona.codigo')
+                ->select(   'usuario.nombre as nombreUsuario',
+                            'usuario.privilegio',
+                            'persona.nombre as nombrePersona',
+                            'persona.apellidoPaterno',
+                            'persona.apellidoMaterno')
+                ->get();
     }
-    public function existeUsuario($nombre){
+    public static function crearUsuario($extend){
+        $nuevoNombreUsuario="";$nuevaContraseña="";
+        $nombreOcupado="";$contraseñaInvalida="";
+        $personas=controladorPersonas::nombresPersonas();
+        return view('usuario.crear',compact(
+            'extend',
+            'personas',
+            'nuevoNombreUsuario',
+            'nuevaContraseña',
+            'nombreOcupado',
+            'contraseñaInvalida'
+        ));
+    }
+
+    ///////////////////////////////////////////////////////////////
+
+    public static function existeUsuario($nombre){
         $usuario=DB::table('usuario')->where('nombre',$nombre)->first();
         return $usuario!="";
     }
-    public function contraseñaCorrecta($nombre,$contraseña){
+    public static function contraseñaCorrecta($nombre,$contraseña){
         $correcto=DB::table('usuario')
             ->where([
                 ['nombre','=',$nombre],
@@ -24,3 +47,16 @@ class controladorUsuarios extends Controller
         return $correcto!="";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -94,10 +94,10 @@ header{
 .costado .mostrar{
     width: 75%;
     height: 100%;
-    padding: 5% 0% 0% 5%;
+    padding: 0% 0% 0% 5%;
     background: rgb(250, 35, 35);
 }
-.costado .mostrar button{
+.boton{
     background-color: darkblue;
     font-size: 200%;
     border-color: darkblue;
@@ -111,6 +111,33 @@ header{
 .costado .mostrar a:hover{
     color:darkblue;
 }
-.costado .mostrar button:hover{
+.boton:hover{
     background-color: gray;
 }
+.botonRegular{
+    background-color: darkblue;
+    font-size: 100%;
+    border-color: darkblue;
+    color: gray;
+    padding: 0%;
+}
+.botonRegular:hover{
+    background-color: gray;
+    color: darkblue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

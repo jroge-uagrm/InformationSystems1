@@ -21,21 +21,25 @@ class controlador extends Controller
     public function contactanos(){
         return view('contactanos');
     }
+    public function cursos(){
+        $cursos=controladorCursos::cursos();
+        return view('curso.mostrar',compact('cursos'));
+    }
     public function verificarInicioDeSesion(Request $request){
         $this->validate($request,[
             'nombreUsuario'=>'required|max:30',
             'contrasenhaUsuario'=>'required|max:30',
         ]);
-        if($this->existeUsuario($request->input('nombreUsuario'))){
-            if($this->contraseñaCorrecta(
+        if(controladorUsuarios::existeUsuario($request->input('nombreUsuario'))){
+            if(controladorUsuarios::contraseñaCorrecta(
             $request->input('nombreUsuario'),
             $request->input('contrasenhaUsuario'))){
                 if($request->tipoPersona=='A'){
-                    return view('usuarioAlumno');
+                    return view('usuario.usuarioAlumno');
                 }elseif ($request->tipoPersona=='D'){
-                    return view('usuarioDocente');
+                    return view('usuario.usuarioDocente');
                 }else{
-                    return view('usuarioTrabajador');
+                    return view('usuario.usuarioTrabajador');
                 }
             }else{
                 $nombre=$request->input('nombreUsuario');
