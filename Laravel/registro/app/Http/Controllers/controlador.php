@@ -8,72 +8,51 @@ use Carbon\Carbon;
 
 class controlador extends Controller
 {
-    public function index(){}
-    public function create(){}
-    public function store(Request $request){}
-    public function show($id){}
-    public function edit($id){}
-    public function update(Request $request, $id){}
-    public function destroy($id){}
-        
-    //---------------------Personal------------------------
-
-    //VISTAS
-    public function inicio(){return view('inicio');}
-    public function informacion(){return view('informacion');}
-    public function iniciarSesion(){return view('iniciarSesion');}    
-    public function contactanos(){return view('contactanos');}
-
-    public function cursosDisponibles(){return view('cursosDisponibles');}
-    public function cursosTomados(){return view('cursosTomados');}
-    public function miHorarioAlumno(){return view('miHorarioAlumno');}
-    public function pagos(){return view('pagos');}
-    public function cerrarSesionAlumno(){return view('cerrarSesionAlumno');}
-    
-    public function misCursos(){return view('misCursos');}
-    public function listasDeAlumnos(){return view('listasDeAlumnos');}
-    public function miHorarioDocente(){return view('miHorarioDocente');}
-    public function otros(){return view('otros');}
-    public function cerrarSesionDocente(){return view('cerrarSesionDocente');}
-    
-    public function cerrarSesionTrabajador(){return view('cerrarSesionTrabajador');}
-
-    //VISTAS CON PARAMETROS
-    public function cursos(){
-        //$listaDeCursos=$this->listaDeCursos();
-        $listaDeCursos=([
-            "Curso 1",
-            "Curso 2",
-        ]);
-        return view('cursos',compact('listaDeCursos'));
+    public function inicio(){
+        return view('inicio');
     }
-
-    //CONSULTAS
-    private function listaDeCursos(){
-        return DB::table('curso')->get();
+    public function informacion(){
+        return view('informacion');
     }
-    public function registrarPersona(){
-        return view('registrarPersona');
+    public function iniciarSesion(){
+        $nombre="";$noExiste="";$contraseña="";$contraNoExiste="";
+        return view('iniciarSesion',compact('nombre','noExiste','contraseña','contraNoExiste'));
     }
-
-    //VERIFICACIONES
+    public function contactanos(){
+        return view('contactanos');
+    }
     public function verificarInicioDeSesion(Request $request){
         $this->validate($request,[
             'nombreUsuario'=>'required|max:30',
             'contrasenhaUsuario'=>'required|max:30',
         ]);
-        //return $request->all();
-        if($request->tipoPersona=='A'){
-            return view('usuarioAlumno');
-        }elseif ($request->tipoPersona=='D'){
-            return view('usuarioDocente');
+        if($this->existeUsuario($request->input('nombreUsuario'))){
+            if($this->contraseñaCorrecta(
+            $request->input('nombreUsuario'),
+            $request->input('contrasenhaUsuario'))){
+                if($request->tipoPersona=='A'){
+                    return view('usuarioAlumno');
+                }elseif ($request->tipoPersona=='D'){
+                    return view('usuarioDocente');
+                }else{
+                    return view('usuarioTrabajador');
+                }
+            }else{
+                $nombre=$request->input('nombreUsuario');
+                $noExiste="";
+                $contraseña=$request->input('contrasenhaUsuario');
+                $contraNoExiste="Contreseña incorrecta";
+                return view('iniciarSesion',compact('nombre','noExiste','contraseña','contraNoExiste'));                
+            }
         }else{
-            return view('usuarioTrabajador');
+            $nombre=$request->input('nombreUsuario');
+            $noExiste="Usuario no existe";
+            $contraseña=$request->input('contrasenhaUsuario');
+            $contraNoExiste="";
+            return view('iniciarSesion',compact('nombre','noExiste','contraseña','contraNoExiste'));
         }
     }
-    public function registrar(Request $request){
-        //Para reiniciar primary key de persona
-        //DBCC CHECKIDENT (persona, RESEED,0);
+    public function verificarRegistroDePersona(Request $request){
         $this->validate($request,[
             'CI'=>'required|max:30',
             'Nombre(s)'=>'required|max:30',
@@ -97,20 +76,5 @@ class controlador extends Controller
         ]);
         //return $request->all();
         return DB::table('persona')->get();
-    }
-    
-    //-----------------------OTROS------------------------
-    public function registrados(){
-        $nombre='Jroge';
-        $apellidos='Torrez';
-        $correo='jroge@gmail.com';
-        return view('registrados')->with([
-            'nombreVista'=>$nombre,
-            'apellidosVista'=>$apellidos,
-            'correoVista'=>$correo
-        ]);
-    }
-    public function parametroEjemplo($p){
-        return view('ejemplo',compact('p'));
     }
 }

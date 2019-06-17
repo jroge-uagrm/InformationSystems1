@@ -1,29 +1,32 @@
 <?php
+//Para reiniciar primary key de persona
+//DBCC CHECKIDENT (persona, RESEED,0);
+
 Route::get('/','controlador@inicio');
-Route::get('cursos','controlador@cursos');
+Route::get('cursos','controladorCursos@cursos');
 Route::get('informacion','controlador@informacion');
 Route::get('iniciarSesion','controlador@iniciarSesion');
 Route::get('contactanos','controlador@contactanos');
 
-//SECCION DE ALUMNO
-Route::get('cursosDisponibles','controlador@cursosDisponibles');
-Route::get('cursosTomados','controlador@cursosTomados');
-Route::get('miHorarioAlumno','controlador@miHorarioAlumno');
-Route::get('pagos','controlador@pagos');
-Route::get('cerrarSesionAlumno','controlador@cerrarSesionAlumno');
+//SECCION DE ALUMNOS
+Route::get('cursosDisponibles','controladorCursos@cursosDisponibles');
+Route::get('cursosTomados','controladorCursos@cursosTomados');
+Route::get('miHorarioAlumno','controladorHorarios@miHorarioAlumno');
+Route::get('pagos','controladorPagos@pagos');
+Route::get('cerrarSesionAlumno','controladorAlumnos@cerrarSesionAlumno');
 
 //SECCION DE DOCENTE
-Route::get('misCursos','controlador@misCursos');
-Route::get('listasDeAlumnos','controlador@listasDeAlumnos');
-Route::get('miHorarioDocente','controlador@miHorarioDocente');
-Route::get('otros','controlador@otros');
-Route::get('cerrarSesionDocente','controlador@cerrarSesionDocente');
+Route::get('misCursos','controladorCursos@misCursos');
+Route::get('listasDeAlumnos','controladorAlumnos@listasDeAlumnos');
+Route::get('miHorarioDocente','controladorHorarios@miHorarioDocente');
+Route::get('cerrarSesionDocente','controladorDocentes@cerrarSesionDocente');
 
 //SECCION DE TRABAJADOR
-Route::get('registrarPersona','controlador@registrarPersona');
-Route::get('cerrarSesionTrabajador','controlador@cerrarSesionTrabajador');
+Route::get('registrarPersona','controladorPersonalAdministrativo@registrarPersona');
+Route::get('cerrarSesionTrabajador','controladorPersonalAdministrativo@cerrarSesionTrabajador');
+Route::get('usuarios','controladorUsuarios@usuarios');
 
-//VERIFCACIONES
+//VERIFICACIONES
 Route::post('usuario','controlador@verificarInicioDeSesion');
 Route::post('registro','controlador@verificarRegistroDePersona');
 
