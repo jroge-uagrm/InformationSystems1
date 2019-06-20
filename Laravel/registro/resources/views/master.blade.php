@@ -8,7 +8,15 @@
 </head>
 <body class="principal">
     <header>INEGAS</header>
-    @section('body')
-    @show
+    <div class="centro">
+            @section('body')
+            @show
+    </div>
+    <br>
+    <footer>
+        <label>Desarrollado por: Jroge y Liz</label>
+        <br><br>
+        <label>Todos los Derechos reservados</label>
+    </footer>
 </body>
 </html>

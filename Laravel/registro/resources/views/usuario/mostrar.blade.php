@@ -13,9 +13,9 @@
         <a href="usuarioTrabajador-usuarios-crear">Crear Usuario</a>
     </button>
     <button class="botonRegular">
-        <a href="iniciarSesion">Editar Usuario</a>
+        <a href="usuarioTrabajador-usuarios-editar">Editar Usuario</a>
     </button>
     <button class="botonRegular">
-        <a href="iniciarSesion">Eliminar Usuario</a>
+        <a href="usuarioTrabajador-usuarios-eliminar">Eliminar Usuario</a>
     </button>
 @endsection

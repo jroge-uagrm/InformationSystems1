@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class controladorUsuarios extends Controller
 {
-    public static function usuarios(){
+    public static function mostrar(){
         return $usuarios=DB::table('usuario')
                 ->join('persona', 'usuario.codigoPersona', '=', 'persona.codigo')
                 ->select(   'usuario.nombre as nombreUsuario',
@@ -18,10 +18,10 @@ class controladorUsuarios extends Controller
                             'persona.apellidoMaterno')
                 ->get();
     }
-    public static function crearUsuario($extend){
+    public static function crear($extend){
         $nuevoNombreUsuario="";$nuevaContraseña="";
         $nombreOcupado="";$contraseñaInvalida="";
-        $personas=controladorPersonas::nombresPersonas();
+        $personas=controladorPersonas::nombresPersonasSinUsuario();
         return view('usuario.crear',compact(
             'extend',
             'personas',
@@ -31,9 +31,12 @@ class controladorUsuarios extends Controller
             'contraseñaInvalida'
         ));
     }
+    public static function editar($extend){
+        $usuarios=DB::table('usuario')->select('nombre')->orderBy('nombre','asc')->get();
+        return view('usuario.elegirUsuario',compact('usuarios','extend'));
+    }
 
     ///////////////////////////////////////////////////////////////
-
     public static function existeUsuario($nombre){
         $usuario=DB::table('usuario')->where('nombre',$nombre)->first();
         return $usuario!="";

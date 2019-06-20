@@ -1,34 +1,15 @@
- .principal{
+.error{
+    color: white;
+    font-size: 15px;
+    font-family: monospace;
+}
+.principal{
     background:darkgrey;
     margin:auto;
 }
-.centro{
-    width: 70%;
-    margin:auto;
-    padding: 0%;
+a{
+    text-decoration: none;
 }
-.centro .tabs{ 
-    width: 100%;
-    font-size: 120%;
-    margin: 0%;
-    padding: 0%;
-    display: flex;
-}
-.centro .tabs a{
-    width: 25%;
-    background: black;
-    margin:0%;
-    padding:1% 0%;
-    list-style:none;
-    text-align: center;
-    color: gray;
-}
-.centro .tabs a:hover{
-    background: rgb(250, 35, 35);
-    color:darkblue;
-}
-a{text-decoration: none;}
-
 header{
     margin:auto;
     font-size: 500%;
@@ -40,29 +21,20 @@ header{
     color:transparent;
     background: transparent;
 }
-.parrafo{
-    margin: 0%;
-    padding: 0 0 0 5%;
-    background: rgb(250, 35, 35);
-}
-.parrafo form{
+.costado .mostrar .formGrande{
     font-size: 200%;
 }
-.parrafo form input{
+.costado .mostrar .formGrande input{
     font-size: 100%;
     background-color: gray;
 }
-.error{
-    color: white;
-    font-size: 15px;
-    font-family: monospace;
-}
-.parrafo .boton{
+.costado .mostrar .boton{
     background-color: darkblue;
     color:gray;
     font-size: 100%;
     border-color: darkblue;
-}.parrafo .boton:hover{
+}
+.costado .mostrar .boton:hover{
     background-color: gray;
     color:darkblue;
 }

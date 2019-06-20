@@ -12,10 +12,21 @@ class controladorPersonas extends Controller
         $personas=DB::table('persona')->get();
         return view('persona.mostrar',compact('personas','extend'));
     }
-    public static function nombresPersonas(){
+    public static function crear($extend){
+        return view('persona.crear',compact('extend'));
+    }
+
+
+
+    public static function nombresPersonasSinUsuario(){
         return $personas=DB::table('persona')
                 ->select('codigo','apellidoPaterno','apellidoMaterno','nombre')
-                ->orderBy('apellidoPaterno', 'asc')
+                ->whereNotExists(function($query){
+                    $query->select(DB::raw(1))
+                        ->from('usuario')
+                        ->whereRaw('usuario.codigoPersona = persona.codigo');
+                })
+                ->orderBy('apellidoPaterno','asc')
                 ->get();
         return $personas;
     }

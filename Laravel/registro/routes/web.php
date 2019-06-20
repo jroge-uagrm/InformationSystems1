@@ -2,11 +2,7 @@
 //Para reiniciar primary key de persona
 //DBCC CHECKIDENT (persona, RESEED,0);
 
-Route::get('/','controlador@inicio');
-Route::get('cursos','controlador@cursos');
-Route::get('informacion','controlador@informacion');
-Route::get('iniciarSesion','controlador@iniciarSesion');
-Route::get('contactanos','controlador@contactanos');
+Route::get('/','controlador@iniciarSesion');
 
 //SECCION DE ALUMNOS
 Route::get('cursosDisponibles','controladorCursos@cursosDisponibles');
@@ -21,19 +17,24 @@ Route::get('listasDeAlumnos','controladorAlumnos@listasDeAlumnos');
 Route::get('miHorarioDocente','controladorHorarios@miHorarioDocente');
 Route::get('cerrarSesionDocente','controladorDocentes@cerrarSesionDocente');
 
+//SECCION DE TRABAJADORES
 Route::get('usuarioTrabajador-personas','controladorPersonalAdministrativo@personas');
-Route::get('usuarioTrabajador-registrarPersona','controladorPersonalAdministrativo@registrarPersona');
-Route::get('usuarioTrabajador-cerrarSesion','controladorPersonalAdministrativo@cerrarSesion');
+Route::get('usuarioTrabajador-personas-crear','controladorPersonalAdministrativo@crearPersona');
+Route::get('usuarioTrabajador-personas-editar','controladorPersonalAdministrativo@editarPersona');
+Route::get('usuarioTrabajador-personas-eliminar','controladorPersonalAdministrativo@eliminarPersona');
+
 Route::get('usuarioTrabajador-usuarios','controladorPersonalAdministrativo@usuarios');
 Route::get('usuarioTrabajador-usuarios-crear','controladorPersonalAdministrativo@crearUsuario');
-Route::get('usuarioTrabajador-crearUsuario','controladorPersonalAdministrativo@crearUsuario');
-Route::get('usuarioTrabajador-pagos','controladorPagos@pagos');
+Route::get('usuarioTrabajador-usuarios-editar','controladorPersonalAdministrativo@editarUsuario');
+Route::get('usuarioTrabajador-usuarios-eliminar','controladorPersonalAdministrativo@eliminarUsuario');
+Route::get('usuarioTrabajador-cerrarSesion','controladorPersonalAdministrativo@cerrarSesion');
 
 //VERIFICACIONES
 Route::post('usuario','controlador@verificarInicioDeSesion');
 Route::post('nuevoUsuario','controladorPersonalAdministrativo@verificarCreacionUsuario');
-
-Route::post('registro','controlador@verificarRegistroDePersona');
+Route::post('editarUsuario','controladorPersonalAdministrativo@verificarEdicionUsuario');
+Route::post('confirmarCambios','controladorPersonalAdministrativo@verificarCambiosUsuario');
+Route::post('nuevaPersona','controladorPersonalAdministrativo@verificarCreacionPersona');
 
 
 /*Route::get('nuevoRegistro','controlador@registro');

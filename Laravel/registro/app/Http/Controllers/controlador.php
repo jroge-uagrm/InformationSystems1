@@ -8,22 +8,14 @@ use Carbon\Carbon;
 
 class controlador extends Controller
 {
-    public function inicio(){
-        return view('inicio');
-    }
-    public function informacion(){
-        return view('informacion');
-    }
     public function iniciarSesion(){
         $nombre="";$noExiste="";$contraseña="";$contraNoExiste="";
-        return view('iniciarSesion',compact('nombre','noExiste','contraseña','contraNoExiste'));
-    }
-    public function contactanos(){
-        return view('contactanos');
-    }
-    public function cursos(){
-        $cursos=controladorCursos::cursos();
-        return view('curso.mostrar',compact('cursos'));
+        return view('iniciarSesion',compact(
+            'nombre',
+            'noExiste',
+            'contraseña',
+            'contraNoExiste'
+        ));
     }
     public function verificarInicioDeSesion(Request $request){
         $this->validate($request,[
@@ -35,12 +27,17 @@ class controlador extends Controller
             $request->input('nombreUsuario'),
             $request->input('contrasenhaUsuario'))){
                 if($request->tipoPersona=='A'){
-                    return view('usuario.usuarioAlumno');
-                }elseif ($request->tipoPersona=='D'){
-                    return view('usuario.usuarioDocente');
+                    $extend="usuario.usuarioAlumno";
+                    $msj="Inicio de sesion como Alumno";
+                }elseif($request->tipoPersona=='D'){
+                    $extend="usuario.usuarioDocente";
+                    $msj="Inicio de sesion como Docente";
                 }else{
-                    return view('usuario.usuarioTrabajador');
+                    $extend="usuario.usuarioTrabajador";
+                    $msj="Inicio de sesion como Trabajador";
                 }
+                $section="mostrar";
+                return view('plantilla',compact('extend','section','msj'));
             }else{
                 $nombre=$request->input('nombreUsuario');
                 $noExiste="";

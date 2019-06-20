@@ -10,4 +10,14 @@
         </p>
         <br>
     @endforeach
+    <br>
+    <button class="botonRegular">
+        <a href="usuarioTrabajador-personas-crear">Registrar Persona</a>
+    </button>
+    <button class="botonRegular">
+        <a href="usuarioTrabajador-personas-editar">Editar Persona</a>
+    </button>
+    <button class="botonRegular">
+        <a href="usuarioTrabajador-personas-eliminar">Eliminar Persona</a>
+    </button>
 @endsection
