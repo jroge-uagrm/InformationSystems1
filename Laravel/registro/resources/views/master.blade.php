@@ -6,17 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/css/estilos.css">
 </head>
-<body class="principal">
-    <header>INEGAS</header>
+<body class="fondoGeneral">
+    <header class="textoINEGAS">INEGAS</header>
     <div class="centro">
             @section('body')
             @show
     </div>
     <br>
     <footer>
-        <label>Desarrollado por: Jroge y Liz</label>
-        <br><br>
-        <label>Todos los Derechos reservados</label>
+        
     </footer>
 </body>
 </html>

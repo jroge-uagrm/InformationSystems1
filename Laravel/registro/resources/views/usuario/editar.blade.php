@@ -1,7 +1,7 @@
 @extends($extend)
 @section('mostrar')
 <h1>EDITAR USUARIO</h1>
-<form method="POST" action="conf">
+<form method="POST" action="confirmarCambiosUsuario">
     <label for="viejoNombreUsuario">Nombre Usuario Actual: {{$viejoNombreUsuario}}</label>
     <br>
     <label>Privilegio Actual: {{$viejoPrivilegio}}</label>

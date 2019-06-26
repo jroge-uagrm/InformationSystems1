@@ -1,101 +1,100 @@
-.error{
-    color: white;
-    font-size: 15px;
-    font-family: monospace;
+:root{
+    --colorDeFondoGeneral:
+    rgb(211, 211, 211);
+    ;
+    --colorDeFormularioIniciarSesion:
+    rgb(94, 94, 255)
+    ;
 }
-.principal{
-    background:darkgrey;
-    margin:auto;
+.fondoGeneral{
+    background:var(--colorDeFondoGeneral);
 }
-a{
-    text-decoration: none;
-}
-header{
-    margin:auto;
-    font-size: 500%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+.textoINEGAS{
+    font-size:500%;
+    font-family:Georgia,'Times New Roman',Times,serif;
     color: darkblue;
-    text-align: center;
+    text-align:center;
 }
-.transparente{
-    color:transparent;
-    background: transparent;
+.formIniciarSesion{
+    width:70%;
+    margin:1%auto;
+    background-color:var(--colorDeFormularioIniciarSesion);
+    padding:1%5%;
 }
-.costado .mostrar .formGrande{
-    font-size: 200%;
+.formIniciarSesion label{
+    font-size:200%;
 }
-.costado .mostrar .formGrande input{
+.formIniciarSesion input{
     font-size: 100%;
+    background-color: var(--colorDeFondoGeneral);
+}
+.formIniciarSesion button{
+    width: 40%;
+    padding: 2%0%;
     background-color: gray;
+    font-size: 75%;
+    color:black;
+    border-style: ridge;
+    border-color: black;
 }
-.costado .mostrar .boton{
-    background-color: darkblue;
-    color:gray;
-    font-size: 100%;
-    border-color: darkblue;
+.formIniciarSesion button:hover{
+    background-color:rgb(100, 100, 100);
 }
-.costado .mostrar .boton:hover{
-    background-color: gray;
-    color:darkblue;
-}
-.costado{
-    width: 90%;
-    margin:5% 5%;
-    display: flex;
-    padding: 0%;
-}
-.costado .disponibles{
+
+.formIniciarSesion .disponibles{
     font-size: 120%;
     margin: 0%;
     width: 20%;
     background: black;
     padding: 0%;
 }
-.costado .disponibles a{
+.formIniciarSesion .disponibles a{
     float: left;
     width: 100%;
     margin: 0%;
     padding: 5% 0%;
-    color: gray;
+    /* color: gray; */
+    color:white;
     text-align: center;
 }
-.costado .disponibles a:hover{
-    background: rgb(250, 35, 35);
-    color:darkblue;
+.formIniciarSesion .disponibles a:hover{
+    /* color:darkblue; */
+    color:rgb(94, 94, 255);
 }
-.costado .mostrar{
+.formIniciarSesion .mostrar{
     width: 75%;
     height: 100%;
     padding: 0% 0% 0% 5%;
-    background: rgb(250, 35, 35);
+    /* background: rgb(250, 35, 35); */
+    background-color: rgb(94, 94, 255);
+}
+.formIniciarSesion .mostrar a{
+    /* color:rgb(211, 211, 211); */
+    color:white;
+    font-style: none;
+}
+.formIniciarSesion .mostrar a:hover{
+    color:darkblue; 
 }
 .boton{
     background-color: darkblue;
     font-size: 200%;
-    border-color: darkblue;
-    color: gray;
     padding: 0%;
 }
-.costado .mostrar a{
-    color: gray;
-    font-style: none;
-}
-.costado .mostrar a:hover{
-    color:darkblue;
-}
 .boton:hover{
-    background-color: gray;
+    background-color: rgb(211, 211, 211);
 }
 .botonRegular{
     background-color: darkblue;
     font-size: 100%;
     border-color: darkblue;
-    color: gray;
+    /* color: rgb(211, 211, 211); */
+    color:white;
     padding: 0%;
 }
 .botonRegular:hover{
-    background-color: gray;
-    color: darkblue;
+    background-color: rgb(211, 211, 211);
+    color:darkblue;
 }
 
 
@@ -113,3 +112,11 @@ header{
 
 
 
+.error{
+    color: rgb(211, 0, 0);
+    font-size: 75%;
+    font-family: monospace;
+}
+a{
+    text-decoration: none;
+}

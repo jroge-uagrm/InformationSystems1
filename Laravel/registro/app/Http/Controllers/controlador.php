@@ -10,11 +10,13 @@ class controlador extends Controller
 {
     public function iniciarSesion(){
         $nombre="";$noExiste="";$contraseña="";$contraNoExiste="";
+        $noEsAlumno="";$noEsDocente="";$noEsTrabajador="";
         return view('iniciarSesion',compact(
             'nombre',
             'noExiste',
             'contraseña',
-            'contraNoExiste'
+            'contraNoExiste',
+            'noEsAlumno','noEsDocente','noEsTrabajador'
         ));
     }
     public function verificarInicioDeSesion(Request $request){
@@ -43,14 +45,20 @@ class controlador extends Controller
                 $noExiste="";
                 $contraseña=$request->input('contrasenhaUsuario');
                 $contraNoExiste="Contreseña incorrecta";
-                return view('iniciarSesion',compact('nombre','noExiste','contraseña','contraNoExiste'));                
+                $noEsAlumno="";$noEsDocente="";$noEsTrabajador="";
+                return view('iniciarSesion',compact(
+                    'nombre','noExiste','contraseña','contraNoExiste',
+                    'noEsAlumno','noEsDocente','noEsTrabajador'));                
             }
         }else{
             $nombre=$request->input('nombreUsuario');
             $noExiste="Usuario no existe";
             $contraseña=$request->input('contrasenhaUsuario');
             $contraNoExiste="";
-            return view('iniciarSesion',compact('nombre','noExiste','contraseña','contraNoExiste'));
+            $noEsAlumno="";$noEsDocente="";$noEsTrabajador="";
+            return view('iniciarSesion',compact(
+                'nombre','noExiste','contraseña','contraNoExiste',
+                'noEsAlumno','noEsDocente','noEsTrabajador'));
         }
     }
     public function verificarRegistroDePersona(Request $request){

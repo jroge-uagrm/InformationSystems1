@@ -1,14 +1,6 @@
 @extends($extend)
 @section('mostrar')
-    <h1>USUARIOS: </h1>
-    @foreach($usuarios as $usuario)
-        <p> Usuario: {{$usuario->nombreUsuario}}<br>
-            Privilegio: {{$usuario->privilegio}}<br>
-            Nombre(s): {{$usuario->nombrePersona}}<br>
-            Apellidos: {{$usuario->apellidoPaterno}} {{$usuario->apellidoMaterno}}
-        </p>
-    @endforeach
-    <br>
+    <h1>USUARIOS</h1>
     <button class="botonRegular">
         <a href="usuarioTrabajador-usuarios-crear">Crear Usuario</a>
     </button>
@@ -18,4 +10,11 @@
     <button class="botonRegular">
         <a href="usuarioTrabajador-usuarios-eliminar">Eliminar Usuario</a>
     </button>
+    @foreach($usuarios as $usuario)
+        <p> <b>Usuario:</b> {{$usuario->nombreUsuario}}<br>
+            <b>Privilegio:</b> {{$usuario->privilegio}}<br>
+            <b>Nombre(s):</b> {{$usuario->nombrePersona}}<br>
+            <b>Apellidos:</b> {{$usuario->apellidoPaterno}} {{$usuario->apellidoMaterno}}
+        </p>
+    @endforeach
 @endsection

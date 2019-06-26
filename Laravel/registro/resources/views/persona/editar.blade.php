@@ -1,9 +1,9 @@
 @extends($extend)
 @section('mostrar')
-<h1>REGISTRAR PERSONA</h1>
+<h1>EDITAR PERSONA</h1>
     <form action="nuevaPersona" method="post">
         <label><b>CI:</b>
-            <input type="text"name="CI"value="{{old('CI')}}{{$antiguoCi}}">
+            <input type="text"name="CI"value="{{old('CI')}}">
             {!!$errors->first('CI','<span class="error">:message</span>')!!}
             <label class="error"for="ciYaExiste">{{$ciYaExiste}}</label>
         </label>

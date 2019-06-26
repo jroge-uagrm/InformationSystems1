@@ -1,16 +1,6 @@
 @extends($extend)
 @section('mostrar')
-    @foreach ($personas as $persona)
-        <p> Nombre(s): {{$persona->nombre}}<br>
-            Apellidos: {{$persona->apellidoPaterno}} {{$persona->apellidoMaterno}}<br>        
-            CI       : {{$persona->ci}}<br>
-            Telefono : {{$persona->telefono}}<br>
-            Correo   : {{$persona->correo}}<br>
-            Fecha Nac: {{$persona->fechaNacimiento}}
-        </p>
-        <br>
-    @endforeach
-    <br>
+<h1>PERSONAS</h1>
     <button class="botonRegular">
         <a href="usuarioTrabajador-personas-crear">Registrar Persona</a>
     </button>
@@ -20,4 +10,14 @@
     <button class="botonRegular">
         <a href="usuarioTrabajador-personas-eliminar">Eliminar Persona</a>
     </button>
+    @foreach ($personas as $persona)
+        <p> <b>CI       :</b> {{$persona->ci}}<br>
+            <b>Nombre(s):</b> {{$persona->nombre}}<br>
+            <b>Apellidos:</b> {{$persona->apellidoPaterno}} {{$persona->apellidoMaterno}}<br>        
+            <b>Telefono :</b> {{$persona->telefono}}<br>
+            <b>Correo   :</b> {{$persona->correo}}<br>
+            <b>Fecha Nac:</b> {{$persona->fechaNacimiento}}
+        </p>
+        <br>
+    @endforeach
 @endsection

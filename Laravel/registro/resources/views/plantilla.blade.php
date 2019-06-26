@@ -1,5 +1,4 @@
 @extends($extend)
-
-@section($section)
+@section('mostrar')
     <h1>{{$msj}}</h1>
 @endsection
