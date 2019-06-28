@@ -28,15 +28,41 @@ class controlador extends Controller
             if(controladorUsuarios::contraseñaCorrecta(
             $request->input('nombreUsuario'),
             $request->input('contrasenhaUsuario'))){
+                $nombre=$request->input('nombreUsuario');
+                $noExiste="";
+                $contraseña=$request->input('contrasenhaUsuario');
+                $contraNoExiste="";
+                $nombreP=$request->input('nombreUsuario');
                 if($request->tipoPersona=='A'){
-                    $extend="usuario.usuarioAlumno";
-                    $msj="Inicio de sesion como Alumno";
+                    if(controladorUsuarios::usuarioEsDeTipo("tipoAlumno",$nombreP)){
+                        $extend="usuario.usuarioAlumno";
+                        $msj="Inicio de sesion como Alumno";
+                    }else{
+                        $noEsAlumno="No Registrado Como Alumno";$noEsDocente="";$noEsTrabajador="";
+                        return view('iniciarSesion',compact(
+                            'nombre','noExiste','contraseña','contraNoExiste',
+                            'noEsAlumno','noEsDocente','noEsTrabajador'));                
+                    }
                 }elseif($request->tipoPersona=='D'){
-                    $extend="usuario.usuarioDocente";
-                    $msj="Inicio de sesion como Docente";
+                    if(controladorUsuarios::usuarioEsDeTipo("tipoDocente",$nombreP)){
+                        $extend="usuario.usuarioDocente";
+                        $msj="Inicio de sesion como Docente";
+                    }else{
+                        $noEsAlumno="";$noEsDocente="No Registrado Como Docente";$noEsTrabajador="";
+                        return view('iniciarSesion',compact(
+                            'nombre','noExiste','contraseña','contraNoExiste',
+                            'noEsAlumno','noEsDocente','noEsTrabajador'));                
+                    }
                 }else{
-                    $extend="usuario.usuarioTrabajador";
-                    $msj="Inicio de sesion como Trabajador";
+                    if(controladorUsuarios::usuarioEsDeTipo("tipoTrabajador",$nombreP)){
+                        $extend="usuario.usuarioTrabajador";
+                        $msj="Inicio de sesion como Trabajador";
+                    }else{
+                        $noEsAlumno="";$noEsDocente="";$noEsTrabajador="No Registrado Como Trabajador";
+                        return view('iniciarSesion',compact(
+                            'nombre','noExiste','contraseña','contraNoExiste',
+                            'noEsAlumno','noEsDocente','noEsTrabajador'));
+                    }
                 }
                 $section="mostrar";
                 return view('plantilla',compact('extend','section','msj'));

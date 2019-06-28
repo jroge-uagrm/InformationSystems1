@@ -35,7 +35,6 @@ class controladorUsuarios extends Controller
         $usuarios=DB::table('usuario')->select('nombre')->orderBy('nombre','asc')->get();
         return view('usuario.elegirUsuario',compact('usuarios','extend'));
     }
-
     ///////////////////////////////////////////////////////////////
     public static function existeUsuario($nombre){
         $usuario=DB::table('usuario')->where('nombre',$nombre)->first();
@@ -48,6 +47,17 @@ class controladorUsuarios extends Controller
                 ['contraseña','=',$contraseña],
             ])->first();
         return $correcto!="";
+    }
+    public static function usuarioEsDeTipo($tipoPersona,$nombreUsuario){
+        $codigoPersona=DB::table('usuario')
+                ->select('codigoPersona')
+                ->where('nombre', '=', $nombreUsuario)
+                ->get();
+        $tipo=DB::table('persona')
+                ->select($tipoPersona)
+                ->where('codigo','=',$codigoPersona)
+                ->get();
+        return $tipo=="1";
     }
 }
 
