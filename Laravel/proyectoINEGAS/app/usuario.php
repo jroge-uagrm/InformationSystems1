@@ -16,4 +16,9 @@ class usuario extends Model
     {
         return $this->hasOne('App\persona','codigoPersona');
     }
+
+    public function bitacora()
+    {
+        return $this->belongsTo('App\bitacora','nombreUsuario');
+    }
 }
