@@ -1,0 +1,95 @@
+:root{
+    --colorDeFondoGeneral:rgb(211, 211, 211);
+    --colorDeFormularioIniciarSesion:rgb(94, 94, 255);
+}
+@font-face{
+    font-family: miFira;
+    src: url(../css/fuentes/FiraCode/FiraCode-Regular.otf)
+}
+.fondoGeneral{
+    background:var(--colorDeFondoGeneral);
+    font-family: miFira;
+    display: flex;
+}
+.imagenINEGAS{
+    background-image: url(../css/imagenes/inegas.png);
+    background-size: cover;
+    width: 400px;
+    height: 200px;
+}
+.textoINEGAS{
+    font-size:500%;
+    font-family:Georgia,'Times New Roman',Times,serif;
+    color: darkblue;
+    text-align:center;
+}
+.formIniciarSesion{
+    width:70%;
+    margin:1%auto;
+    background-color:var(--colorDeFormularioIniciarSesion);
+    padding:1%5%;
+}
+.formIniciarSesion label{
+    font-size:200%;
+}
+.formIniciarSesion input{
+    font-size: 100%;
+    background-color: var(--colorDeFondoGeneral);
+}
+.formIniciarSesion button{
+    width: 40%;
+    padding: 2%0%;
+    background-color: gray;
+    font-size: 75%;
+    color:black;
+    border-style: ridge;
+    border-color: black;
+}
+.formIniciarSesion button:hover{
+    background-color:rgb(201, 191, 191);
+}
+.centro{
+    width:80%;
+    margin:1%auto;
+    background-color:var(--colorDeFormularioIniciarSesion);
+    display: flex;
+    padding: 0%;
+}
+.disponibles{
+    font-size: 120%;
+    width: 20%;
+    height: 3px;
+    padding: 0%;
+}
+.disponibles ul{
+    margin: 0%;
+    padding: 0%;
+}
+.disponibles li{
+    list-style: none;
+    background-color: black;
+    text-align: center;
+    padding: 10%5%;
+    margin: 0%;
+}
+.disponibles li:hover{
+    background-color: rgb(61, 61, 61);
+    color:var(--colorDeFondoGeneral);
+}
+.disponibles li a{
+    font-style: none;
+    color: var(--colorDeFondoGeneral);
+    text-decoration: none;
+}
+.mostrar{
+    padding: 1%3%;
+}
+
+
+
+
+.error{
+    color: rgb(211, 0, 0);
+    font-size: 75%;
+    font-family: monospace;
+}
