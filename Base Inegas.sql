@@ -56,6 +56,15 @@ create table usuario(
 	foreign key(codigoPersona)references persona(codigo)
 );
 
+create table bitacora(
+	nro int primary key,
+	accion varchar(50) not null,
+	Fecha date not null,
+	hora varchar(5)not null,
+	nombreUsuario varchar(30) not null
+	foreign key(nombreUsuario)references usuario(nombre)
+);
+
 create table departamento(
 	id int primary key,
 	nombre varchar(50) not null,
