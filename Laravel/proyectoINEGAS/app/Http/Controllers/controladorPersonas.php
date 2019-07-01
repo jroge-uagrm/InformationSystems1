@@ -23,23 +23,33 @@ class controladorPersonas extends Controller
     }
     public static function crear($extend){
         $ciYaExiste="";
-        $antiguoCi="";
-        return view('persona.crear',compact('extend','ciYaExiste','antiguoCi'));
+        $antiguoCi="";$antiguoNombre="";$antiguoApellidoPaterno="";
+        $antiguoApellidoMaterno="";$antiguoTelefono="";$antiguoCorreo="";
+        $antiguaFechaNacimiento="";
+        return view('persona.crear',compact(
+            'extend','ciYaExiste',
+            'antiguoCi',
+            'antiguoNombre',
+            'antiguoApellidoPaterno',
+            'antiguoApellidoMaterno',
+            'antiguoTelefono',
+            'antiguoCorreo',
+            'antiguaFechaNacimiento'
+        ));
     }
     public static function editar($extend){
-        $personas=DB::table('persona')->orderBy('ci','asc')->get();
         $ciNoExiste="";
         $antiguoCi="";
         return view('persona.elegirPersona',compact(
             'extend',
-            'personas',
             'ciNoExiste',
             'antiguoCi'
         ));
     }
-
-
-
+    public static function eliminar($extend){
+        $ciNoExiste="";$antiguoCi="";
+        return view('persona.eliminar',compact('extend','ciNoExiste','antiguoCi'));
+    }
     public static function nombresPersonasSinUsuario(){
         return $personas=DB::table('persona')
                 ->select('codigo','apellidoPaterno','apellidoMaterno','nombre')
@@ -55,6 +65,10 @@ class controladorPersonas extends Controller
     public static function existeCi($ciABuscar){
         $usuario=DB::table('persona')->where('ci',$ciABuscar)->first();
         return $usuario!="";
+    }
+    public static function getPersona($ciPersona){
+        $persona=DB::table('persona')->where('ci',$ciPersona)->first();
+        return $persona;
     }
 }
 

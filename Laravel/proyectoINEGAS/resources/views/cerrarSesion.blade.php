@@ -3,5 +3,5 @@
     <h1>CERRAR SESION</h1>
     <label>¿Cerrar Sesion?</label>
     <br><br>
-    <button class="botonRegular"><a href="iniciarSesion">CONFIRMAR</a></button>
+    <button class="botonRegular"><a href="/">CONFIRMAR</a></button>
 @endsection

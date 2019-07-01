@@ -50,25 +50,151 @@ class controladorPersonalAdministrativo extends Controller
             $msj="Persona registrada con exito";
             return view('plantilla',compact('extend','msj'));
         }else{
-            $ciYaExiste="Carnet de Identidad no disponible";
-            $antiguoCi=$request->input('ci');
-            return view('persona.crear',compact('ciYaExiste','extend'));
+            $ciYaExiste="Carnet de Identidad en Uso";
+            $antiguoCi=$request->input('CI');
+            $antiguoNombre=$request->input('nombrePersona');
+            $antiguoApellidoPaterno=$request->input('apellidoPaterno');
+            $antiguoApellidoMaterno=$request->input('apellidoMaterno');
+            $antiguoTelefono=$request->input('telefono');
+            $antiguoCorreo=$request->input('correo');
+            $antiguaFechaNacimiento=$request->input('fechaNacimiento');
+            return view('persona.crear',compact(
+                'extend',
+                'ciYaExiste',
+                'antiguoCi',
+                'antiguoNombre',
+                'antiguoApellidoPaterno',
+                'antiguoApellidoMaterno',
+                'antiguoTelefono',
+                'antiguoCorreo',
+                'antiguaFechaNacimiento'
+            ));
         }
     }
     public function verificarEdicionPersona(Request $request){
         $extend="usuario.usuarioTrabajador";
         $this->validate($request,[
-            'ci'=>'required',
-        ]);        
+            'ci'=>'required|numeric'
+        ]);
         if(!controladorPersonas::existeCi($request->input('ci'))){
             $ciNoExiste="Carnet de Identidad no Existe";
             $antiguoCi=$request->input('ci');
             return view('persona.elegirPersona',compact('extend','ciNoExiste','antiguoCi'));
         }else{
-            $persona=DB::table('persona')->where('ci',$request->input('ci'))->get();
-            $ciYaExiste="";
-
-            return view('persona.editar',compact('extend','persona'));
+            $persona=controladorPersonas::getPersona($request->input('ci'));
+            return view('persona.editar',compact(
+                'extend','persona'
+            ));
+        }
+    }
+    public function verificarEliminacionPersona(Request $request){
+        $extend="usuario.usuarioTrabajador";
+        $this->validate($request,[
+            'ci'=>'required|numeric'
+        ]);
+        if(!controladorPersonas::existeCi($request->input('ci'))){
+            $ciNoExiste="Carnet de Identidad no Existe";
+            $antiguoCi=$request->input('ci');
+            return view('persona.eliminar',compact('extend','ciNoExiste','antiguoCi'));
+        }else{
+            DB::table('persona')->where('ci',$request->input('ci'))->delete();
+            $msj="Persona eliminada con exito";
+            return view('plantilla',compact('extend','msj'));
+        }
+    }
+    //////////////////////////////////////////////////////////////
+    public function alumnos(){
+        $extend="usuario.usuarioTrabajador";
+        return controladorAlumnos::alumnos($extend);
+    }
+    public function crearAlumnos(){
+        $extend="usuario.usuarioTrabajador";
+        return controladorAlumnos::crear($extend);
+    }
+    public function editarAlumno(){
+        $extend="usuario.usuarioTrabajador";
+        return controladorAlumnos::editar($extend);
+    }
+    public function eliminarAlumno(){
+        $extend="usuario.usuarioTrabajador";
+        return controladorAlumnos::eliminar($extend);
+    }
+    public function verificarCreacionAlumnos(Request $request){
+        $extend="usuario.usuarioTrabajador";
+        $this->validate($request,[
+            /* 'CI'=>'required|numeric',
+            'nombrePersona'=>'required|max:30',
+            'apellidoPaterno'=>'required|max:30',
+            'apellidoMaterno'=>'required|max:30',
+            'fechaNacimiento'=>'required', */
+        ]);
+        if(controladorPersonas::existeCi($request->input('CI'))){
+            DB::table('persona')->insert([
+                "ci"=>$request->input('CI'),
+                "nombre"=>$request->input('nombrePersona'),
+                "apellidoPaterno"=>$request->input('apellidoPaterno'),
+                "apellidoMaterno"=>$request->input('apellidoMaterno'),
+                "telefono"=>$request->input('telefono'),
+                "correo"=>$request->input('correo'),
+                "fechaNacimiento"=>$request->input('fechaNacimiento'),
+                "tipoAlumno"=>0,
+                "tipoDocente"=>0,
+                "tipoTrabajador"=>1,
+                "created_at"=>Carbon::now()
+            ]);
+            $msj="No existe CI";
+            return view('plantilla',compact('extend','msj'));
+        }else{
+            $ciYaExiste="Carnet de Identidad en Uso";
+            $antiguoCi=$request->input('CI');
+            $antiguoNombre=$request->input('nombrePersona');
+            $antiguoApellidoPaterno=$request->input('apellidoPaterno');
+            $antiguoApellidoMaterno=$request->input('apellidoMaterno');
+            $antiguoTelefono=$request->input('telefono');
+            $antiguoCorreo=$request->input('correo');
+            $antiguaFechaNacimiento=$request->input('fechaNacimiento');
+            return view('persona.crear',compact(
+                'extend',
+                'ciYaExiste',
+                'antiguoCi',
+                'antiguoNombre',
+                'antiguoApellidoPaterno',
+                'antiguoApellidoMaterno',
+                'antiguoTelefono',
+                'antiguoCorreo',
+                'antiguaFechaNacimiento'
+            ));
+        }
+    }
+    public function verificarEdicionPersona(Request $request){
+        $extend="usuario.usuarioTrabajador";
+        $this->validate($request,[
+            'ci'=>'required|numeric'
+        ]);
+        if(!controladorPersonas::existeCi($request->input('ci'))){
+            $ciNoExiste="Carnet de Identidad no Existe";
+            $antiguoCi=$request->input('ci');
+            return view('persona.elegirPersona',compact('extend','ciNoExiste','antiguoCi'));
+        }else{
+            $persona=controladorPersonas::getPersona($request->input('ci'));
+            return view('persona.editar',compact(
+                'extend','persona'
+            ));
+        }
+    }
+    public function verificarEliminacionPersona(Request $request){
+        $extend="usuario.usuarioTrabajador";
+        $this->validate($request,[
+            'ci'=>'required|numeric'
+        ]);
+        if(!controladorPersonas::existeCi($request->input('ci'))){
+            $ciNoExiste="Carnet de Identidad no Existe";
+            $antiguoCi=$request->input('ci');
+            return view('persona.eliminar',compact('extend','ciNoExiste','antiguoCi'));
+        }else{
+            DB::table('persona')->where('ci',$request->input('ci'))->delete();
+            $msj="Persona eliminada con exito";
+            return view('plantilla',compact('extend','msj'));
         }
     }
     //////////////////////////////////////////////////////////////    
