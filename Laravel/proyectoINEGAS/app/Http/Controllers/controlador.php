@@ -19,6 +19,14 @@ class controlador extends Controller
             'noEsAlumno','noEsDocente','noEsTrabajador'
         ));
     }
+
+
+
+
+
+
+
+    
     public function verificarInicioDeSesion(Request $request){
         $this->validate($request,[
             'nombreUsuario'=>'required|max:30',

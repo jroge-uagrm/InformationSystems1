@@ -1,11 +1,9 @@
 @extends($extend)
 @section('mostrar')
 <h1>EDITAR PERSONA</h1>
-    <form action="confirmarCambiosPersona" method="post">
+    <form action="verificarCambiosPersona" method="post">
         <label><b>CI:</b>
-            <input type="text"name="CI"value="{{old('CI')}}{{$persona->ci}}">
-            {!!$errors->first('CI','<span class="error">:message</span>')!!}
-            <label class="error"for="ciYaExiste">{{$ciYaExiste}}</label>
+            <input readonly="readonly"type="text"name="ci"value="{{old('CI')}}{{$persona->ci}}">
         </label>
         <br><br>
         <label><b>Nombre(s):</b>
@@ -32,7 +30,7 @@
         </label>
         <br><br>
         <label><b>Fecha de Nacimiento:</b>
-            <input type="date"name="fechaNacimiento"value="{{old('fechaNacimiento')}}{{$persona->fechaNacimiento}}"">
+            <input type="date"name="fechaNacimiento"value="{{old('fechaNacimiento')}}{{$fecha}}">
             {!!$errors->first('fechaNacimiento','<span class="error">:message</span>')!!}
         </label>
         <br><br>

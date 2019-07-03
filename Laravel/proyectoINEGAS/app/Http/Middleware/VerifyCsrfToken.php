@@ -24,8 +24,12 @@ class VerifyCsrfToken extends Middleware
         'nuevoUsuario',
         'editarUsuario',
         'confirmarCambios',
+        'verificarCambiosPersona',
         'nuevaPersona',
         'editarPersona',
-        'eliminarPersona'
+        'eliminarPersona',
+        'nuevoAlumno',
+        'editarAlumno',
+        'eliminarAlumno'
     ];
 }

@@ -11,7 +11,7 @@
         <a href="usuarioTrabajador-personas-eliminar">Eliminar Persona</a>
     </button>
     @foreach ($personas as $persona)
-        <p> <b>Codigo   :</b> {{$persona->codigo}}<br>
+        <p> 
             <b>CI       :</b> {{$persona->ci}}<br>
             <b>Nombre(s):</b> {{$persona->nombre}}<br>
             <b>Apellidos:</b> {{$persona->apellidoPaterno}} {{$persona->apellidoMaterno}}<br>        
