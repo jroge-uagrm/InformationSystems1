@@ -8,6 +8,10 @@ Route::get('usuarioTrabajador-personas','controladorPersonalAdministrativo@perso
 Route::get('usuarioTrabajador-personas-crear','controladorPersonalAdministrativo@crearPersona');
 Route::get('usuarioTrabajador-personas-editar','controladorPersonalAdministrativo@editarPersona');
 Route::get('usuarioTrabajador-personas-eliminar','controladorPersonalAdministrativo@eliminarPersona');
+Route::get('usuarioTrabajador-alumnos','controladorPersonalAdministrativo@alumnos');
+Route::get('usuarioTrabajador-alumnos-crear','controladorPersonalAdministrativo@crearAlumno');
+Route::get('usuarioTrabajador-alumnos-editar','controladorPersonalAdministrativo@editarAlumno');
+Route::get('usuarioTrabajador-alumnos-eliminar','controladorPersonalAdministrativo@eliminarAlumno');
 
 Route::get('usuarioTrabajador-usuarios','controladorPersonalAdministrativo@usuarios');
 Route::get('usuarioTrabajador-usuarios-crear','controladorPersonalAdministrativo@crearUsuario');
@@ -21,6 +25,7 @@ Route::post('editarUsuario','controladorPersonalAdministrativo@verificarEdicionU
 Route::post('confirmarCambiosUsuario','controladorPersonalAdministrativo@verificarCambiosUsuario');
 Route::post('nuevaPersona','controladorPersonalAdministrativo@verificarCreacionPersona');
 Route::post('editarPersona','controladorPersonalAdministrativo@verificarEdicionPersona');
+Route::post('eliminarPersona','controladorPersonalAdministrativo@verificarEliminacionPersona');
 
 
 

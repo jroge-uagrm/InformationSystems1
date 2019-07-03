@@ -26,5 +26,6 @@ class VerifyCsrfToken extends Middleware
         'confirmarCambios',
         'nuevaPersona',
         'editarPersona',
+        'eliminarPersona'
     ];
 }
